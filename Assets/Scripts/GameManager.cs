@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public CursorManager cursMan;
     public CharacterManager charMan;
+    public CursorManager cursMan;
     
     // Start is called before the first frame update
     void Start()
@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
 
     void SetDefaults()
     {
-        cursMan = GetComponent<CursorManager>();
         charMan = GetComponent<CharacterManager>();
+        cursMan = FindObjectOfType<CursorManager>();
     }
 
     // Update is called once per frame

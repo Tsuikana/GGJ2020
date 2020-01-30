@@ -5,7 +5,7 @@ using UnityEngine;
 public class CursorManager : MonoBehaviour
 {
     public bool hasNewTarget;
-    public Vector2 newCursorTarget;
+    public bool mouseDown;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class CursorManager : MonoBehaviour
     void SetDefaults()
     {
         hasNewTarget = false;
-        newCursorTarget = Vector2.zero;
+        mouseDown = false;
     }
 
     // Update is called once per frame
@@ -24,14 +24,19 @@ public class CursorManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            mouseDown = true;
 
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null)
             {
                 //Debug.Log("Target Point: " + hit.point);
-                newCursorTarget = hit.point;
+                transform.position = hit.point;
                 hasNewTarget = true;
             }
+        }
+        else
+        {
+            mouseDown = false;
         }
     }
 }

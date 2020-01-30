@@ -4,50 +4,59 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    bool hasNewTarget;
-    GameManager gameMan;
-    Vector2 newMoveTarget = Vector2.zero;
+    public float travelDist = 0.0f;
+    public bool hasNewTarget;
+    public Vector2 newMoveTarget;
+
+    public GameObject target;
+    public GameManager gameMan;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         SetDefaults();
     }
 
-    void SetDefaults()
+    // Update is called once per frame
+    protected virtual void Update()
+    {
+        //If there's a target position to move to
+        if (hasNewTarget)
+        {
+            //Checks if object should move to the target
+            if (ShouldMoveToTarget(newMoveTarget))
+            {
+                //Calculate where to move
+                var movePosition = (Vector2)transform.position +
+                    (newMoveTarget - (Vector2)transform.position).normalized *
+                    gameMan.charMan.TimeScaledMoveSpeed;
+                travelDist += (movePosition - (Vector2)transform.position).magnitude;
+                transform.position = movePosition;
+            }
+            //Object is close to target, so will snap to target
+            else
+            {
+                //Snap to target
+                travelDist += (newMoveTarget - (Vector2)transform.position).magnitude;
+                transform.position = newMoveTarget;
+                
+                //Only stop chasing target if mouse button up
+                if (!gameMan.cursMan.mouseDown)
+                {
+                    hasNewTarget = false;
+                }
+            }
+        }
+    }
+
+    protected virtual void SetDefaults()
     {
         hasNewTarget = false;
         newMoveTarget = Vector2.zero;
         gameMan = Camera.main.GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (gameMan.cursMan.hasNewTarget)
-        {
-            hasNewTarget = true;
-            gameMan.cursMan.hasNewTarget = false;
-            newMoveTarget = gameMan.cursMan.newCursorTarget;
-        }
-
-        if (hasNewTarget)
-        {
-            if (ShouldMoveToTarget(newMoveTarget))
-            {
-                transform.position = (Vector2)transform.position +
-                    (newMoveTarget - (Vector2)transform.position).normalized *
-                    gameMan.charMan.TimeScaledMoveSpeed;
-            }
-            else
-            {
-                transform.position = newMoveTarget;
-                hasNewTarget = false;
-            }
-        }
-    }
-
-    bool ShouldMoveToTarget(Vector2 moveTarget)
+    protected bool ShouldMoveToTarget(Vector2 moveTarget)
     {
         float dist = Vector2.Distance(transform.position, moveTarget);
         if ((dist - gameMan.charMan.TimeScaledMoveSpeed) > gameMan.charMan.minMoveThresh)
