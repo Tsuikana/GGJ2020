@@ -7,6 +7,7 @@ public class CursorManager : MonoBehaviour
     public bool hasMoveTarget;
     public bool rMouseDown;
     public GameObject clickTarget;
+    public GameManager gameMan;
 
     private int bgLayerId;
 
@@ -22,6 +23,7 @@ public class CursorManager : MonoBehaviour
         rMouseDown = false;
         clickTarget = null;
         bgLayerId = LayerMask.NameToLayer("background");
+        gameMan = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -40,7 +42,7 @@ public class CursorManager : MonoBehaviour
         }
 
         // Stores RMB click point and target object
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && !gameMan.partyMan.isBusy)
         {
             var hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             foreach (RaycastHit2D hit in hits)

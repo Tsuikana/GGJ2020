@@ -26,6 +26,9 @@ public class GirlController : MonoBehaviour
 
     public void GirlAdded(GameObject girl)
     {
+        if (gameObject == girl)
+            return;
+
         var newGirlStats = girl.GetComponent<GirlStats>();
         if (newGirlStats)
         {

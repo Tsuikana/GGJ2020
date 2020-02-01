@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PartyManager : MonoBehaviour
 {
+    public GameObject pendingPartyGirl;
     public List<GameObject> girlList;
     public float partyHunting;
     public float partyGathering;
@@ -13,6 +14,7 @@ public class PartyManager : MonoBehaviour
     public float thirstiness;
     public float warmth;
     public float parts;
+    public bool isBusy;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,8 @@ public class PartyManager : MonoBehaviour
 
     void SetDefaults()
     {
+        isBusy = false;
+        pendingPartyGirl = null;    
         girlList = new List<GameObject>();
     }
 
@@ -31,15 +35,19 @@ public class PartyManager : MonoBehaviour
         
     }
 
-    public void addGirlToParty(GameObject newGirl)
+    public void addGirlToParty()
     {
+        pendingPartyGirl.GetComponent<MovementControllerGirls>().FollowMc();
+
         foreach (var girl in girlList){
-            girl.GetComponent<GirlController>().GirlAdded(newGirl);
+            girl.GetComponent<GirlController>().GirlAdded(pendingPartyGirl);
         }
-        girlList.Add(newGirl);
-        var newGirlStats = newGirl.GetComponent<GirlStats>();
+        girlList.Add(pendingPartyGirl);
+        var newGirlStats = pendingPartyGirl.GetComponent<GirlStats>();
+
         if (newGirlStats)
         {
+            newGirlStats.pickedUp = true;
             partyGathering += newGirlStats.gathering;
             partyHunting += newGirlStats.hunting;
             partyScouting += newGirlStats.scouting;

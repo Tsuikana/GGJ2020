@@ -32,6 +32,12 @@ public class MovementControllerGirls : MovementController
     protected override void SetDefaults()
     {
         base.SetDefaults();
+        targetMoveCtrlMc = null;
+        target = null;
+    }
+
+    public void FollowMc()
+    {
         targetMoveCtrlMc = FindObjectOfType<MovementControllerMc>();
         target = targetMoveCtrlMc.gameObject;
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MovementControllerMc : MovementController
 {
-    public bool isBusy = false;
     public float minInteractDistance = 0.2f;
     public float prevPosDistThresh = 0.02f;
     public int maxPosListSize = 10;
@@ -19,11 +18,11 @@ public class MovementControllerMc : MovementController
     // Update is called once per frame
     protected override void Update()
     {
-        //Don't update if MC is interacting with something
-        //if (isBusy)
-        //{
-        //    return;
-        //}
+        //Don't update if Party is interacting with something
+        if (gameMan.partyMan.isBusy)
+        {
+            return;
+        }
 
         //Set move target as CursorTarget game object's position
         if (gameMan.cursMan.hasMoveTarget)
@@ -33,8 +32,8 @@ public class MovementControllerMc : MovementController
             //If the Cursor has clicked on a target and they are within interactable distance, prompt to collect
             if (gameMan.cursMan.clickTarget != null && CanInteract(gameMan.cursMan.clickTarget))
             {
-                isBusy = true;
-                gameMan.PromptCollectGirl();
+                gameMan.partyMan.isBusy = true;
+                gameMan.uiMan.PromptRecruit(gameMan.cursMan.clickTarget);
             }
             //Set values for movement
             else
@@ -47,8 +46,8 @@ public class MovementControllerMc : MovementController
         //Move
         base.Update();
 
-        //Update previous position list
-        if (travelDist > prevPosDistThresh)
+        //Update previous position list when girls are following
+        if (travelDist > prevPosDistThresh && gameMan.partyMan.girlList.Count > 0)
         {
             travelDist = 0.0f;
             prevPosList.Add(transform.position);
@@ -64,7 +63,7 @@ public class MovementControllerMc : MovementController
     protected override void SetDefaults()
     {
         base.SetDefaults();
-        isBusy = false;
+        gameMan.partyMan.isBusy = false;
         prevPosList = new List<Vector2>();
         target = gameMan.cursMan.gameObject;
     }

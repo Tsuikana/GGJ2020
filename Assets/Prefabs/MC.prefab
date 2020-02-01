@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6f335cc01c3ce4bb5cd9ac9659adce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pendingPartyGirl: {fileID: 0}
   girlList: []
   partyHunting: 0
   partyGathering: 0
@@ -280,3 +281,4 @@ MonoBehaviour:
   thirstiness: 0
   warmth: 0
   parts: 0
+  isBusy: 0
