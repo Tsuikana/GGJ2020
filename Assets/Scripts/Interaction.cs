@@ -8,6 +8,7 @@ public class Interaction : MonoBehaviour
     int girlsLayerId;
     int gatherLayerId;
     int huntLayerId;
+    int collectLayerId;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class Interaction : MonoBehaviour
         girlsLayerId = LayerMask.NameToLayer("girls");
         gatherLayerId = LayerMask.NameToLayer("gather");
         huntLayerId = LayerMask.NameToLayer("hunt");
+        collectLayerId = LayerMask.NameToLayer("collect");
     }
 
     // Update is called once per frame
@@ -38,11 +40,21 @@ public class Interaction : MonoBehaviour
         }
         else if (targetLayer == gatherLayerId)
         {
-            gameMan.partyMan.gather(gameMan.cursMan.clickTarget);
+            var pickUps = gameMan.cursMan.clickTarget.GetComponent<PickUps>();
+            pickUps.Use();
+            //gameMan.partyMan.gather(pickUps.thirstUp, pickUps.hungerUp);
         }
         else if (targetLayer == huntLayerId)
         {
-            gameMan.partyMan.hunt(gameMan.cursMan.clickTarget);
+            var pickUps = gameMan.cursMan.clickTarget.GetComponent<PickUps>();
+            pickUps.Use();
+            //gameMan.partyMan.hunt(pickUps.thirstUp, pickUps.hungerUp);
+        }
+        else if (targetLayer == collectLayerId)
+        {
+            var pickUps = gameMan.cursMan.clickTarget.GetComponent<PickUps>();
+            pickUps.Use();
+            //gameMan.partyMan.collect(pickUps.partsUp);
         }
     }
 }

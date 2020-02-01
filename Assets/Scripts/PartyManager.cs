@@ -6,15 +6,14 @@ public class PartyManager : MonoBehaviour
 {
     public GameObject pendingPartyGirl;
     public List<GameObject> girlList;
-    public float baseInteractDuration = 2f;
     public float partyHunting;
     public float partyGathering;
     public float partyScouting;
     public float partyMobility;
-    public float partyHunger;
-    public float partyThirstiness;
-    public float warmth;
-    public float parts;
+    public int partyHunger;
+    public int partyThirstiness;
+    public int partyWarmth;
+    public int partyParts;
     public bool isBusy;
 
     // Start is called before the first frame update
@@ -55,7 +54,7 @@ public class PartyManager : MonoBehaviour
 
         if (newGirlStats)
         {
-            newGirlStats.pickedUp = true;
+            newGirlStats.AddToParty();
             partyGathering += newGirlStats.gathering;
             partyHunting += newGirlStats.hunting;
             partyScouting += newGirlStats.scouting;
@@ -81,15 +80,10 @@ public class PartyManager : MonoBehaviour
         byeGirl.GetComponent<GirlController>().DestroyGirl();
     }
 
-    public void gather(GameObject target)
+    public void pickUp(int thirstUp, int hungerUp, int partsUp)
     {
-        Debug.Log("Gathering " + target.name);
-        Destroy(target);
-    }
-
-    public void hunt(GameObject target)
-    {
-        Debug.Log("Hunting " + target.name);
-        Destroy(target);
+        partyThirstiness += thirstUp;
+        partyHunger += hungerUp;
+        partyParts += partsUp;
     }
 }

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6657533172520384297}
   - component: {fileID: 6657533172520384296}
   - component: {fileID: 6657533172520384299}
+  - component: {fileID: -4210821144689553903}
   m_Layer: 13
-  m_Name: Pig
+  m_Name: Hunt_Pig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,3 +98,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &-4210821144689553903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6657533172520384298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe278dd02406fe41b01cb1071c0f2e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerUp: 3
+  thirstUp: 0
+  partsUp: 0
