@@ -185,7 +185,7 @@ PrefabInstance:
     - target: {fileID: 6657533172520384298, guid: 3e11be6fdfa6a8544a32b2fbffef0804,
         type: 3}
       propertyPath: m_Name
-      value: Pig
+      value: Hunt_Pig
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e11be6fdfa6a8544a32b2fbffef0804, type: 3}
@@ -919,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 126557947752926794, guid: 9158b3172de9c3649b1d03c8692aec67,
         type: 3}
       propertyPath: m_Name
-      value: Grass
+      value: Gather_Grass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9158b3172de9c3649b1d03c8692aec67, type: 3}

@@ -84,23 +84,12 @@ public class PartyManager : MonoBehaviour
     public void gather(GameObject target)
     {
         Debug.Log("Gathering " + target.name);
-        var gatherDuration = baseInteractDuration - partyGathering * 0.1f;
-        IEnumerator coroutine = InteractDelay(target, gatherDuration);
-        StartCoroutine(coroutine);
+        Destroy(target);
     }
 
     public void hunt(GameObject target)
     {
         Debug.Log("Hunting " + target.name);
-        var huntDuration = baseInteractDuration - partyHunting * 0.1f;
-        IEnumerator coroutine = InteractDelay(target, huntDuration);
-        StartCoroutine(coroutine);
-    }
-
-    IEnumerator InteractDelay(GameObject target, float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        IsBusy = false;
         Destroy(target);
     }
 }

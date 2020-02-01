@@ -32,8 +32,6 @@ public class Interaction : MonoBehaviour
     public void Interact()
     {
         var targetLayer = gameMan.cursMan.clickTarget.layer;
-
-        gameMan.partyMan.IsBusy = true;
         if (targetLayer == girlsLayerId)
         {
             gameMan.uiMan.PromptRecruit(gameMan.cursMan.clickTarget);

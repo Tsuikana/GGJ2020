@@ -32,6 +32,11 @@ public class PromptHandler : MonoBehaviour
         noButton.onClick.AddListener(OnClickNo);
     }
 
+    public void ShowPrompt()
+    {
+        SetDefaults();
+    }
+
     public void ClosePrompt()
     {
         gameMan.partyMan.IsBusy = false;
