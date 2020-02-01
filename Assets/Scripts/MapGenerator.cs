@@ -17,6 +17,8 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject[] forestTiles;
     public GameObject[] desertTiles;
+    public GameObject[] cityTiles;
+    public GameObject[] neonTiles;
 
     public int difficulty = 0;
 
@@ -43,6 +45,8 @@ public class MapGenerator : MonoBehaviour
         //in a folder called "Resources" like this "Assets/Resources/Prefabs"
         forestTiles = Resources.LoadAll<GameObject>("MapTiles/Forest");
         desertTiles = Resources.LoadAll<GameObject>("MapTiles/Desert");
+        cityTiles = Resources.LoadAll<GameObject>("MapTiles/City");
+        neonTiles = Resources.LoadAll<GameObject>("MapTiles/Neon");
 
         GenerateMap();
     }
@@ -304,6 +308,14 @@ public class MapGenerator : MonoBehaviour
         else if (currentRegion == MapHelper.Region.Desert)
         {
             currentTileSet = desertTiles;
+        }
+        else if (currentRegion == MapHelper.Region.City)
+        {
+            currentTileSet = cityTiles;
+        }
+        else if (currentRegion == MapHelper.Region.Neon)
+        {
+            currentTileSet = neonTiles;
         }
 
         GameObject currentTile = currentTileSet[UnityEngine.Random.Range(0, forestTiles.Length)];
