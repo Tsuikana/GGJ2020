@@ -19,7 +19,7 @@ public class MovementControllerMc : MovementController
     protected override void Update()
     {
         //Don't update if Party is interacting with something
-        if (gameMan.partyMan.isBusy)
+        if (gameMan.partyMan.IsBusy)
         {
             return;
         }
@@ -34,8 +34,7 @@ public class MovementControllerMc : MovementController
                 CanInteract(gameMan.cursMan.clickTarget) && 
                 !IsPickedUp(gameMan.cursMan.clickTarget))
             {
-                gameMan.partyMan.isBusy = true;
-                gameMan.uiMan.PromptRecruit(gameMan.cursMan.clickTarget);
+                gameMan.interaction.Interact();
             }
             //Set values for movement
             else
@@ -65,7 +64,7 @@ public class MovementControllerMc : MovementController
     protected override void SetDefaults()
     {
         base.SetDefaults();
-        gameMan.partyMan.isBusy = false;
+        gameMan.partyMan.IsBusy = false;
         prevPosList = new List<Vector2>();
         target = gameMan.cursMan.gameObject;
     }

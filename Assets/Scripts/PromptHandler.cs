@@ -34,7 +34,7 @@ public class PromptHandler : MonoBehaviour
 
     public void ClosePrompt()
     {
-        gameMan.partyMan.isBusy = false;
+        gameMan.partyMan.IsBusy = false;
         gameObject.SetActive(false);
     }
 

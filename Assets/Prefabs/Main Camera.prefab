@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3925027359165989211}
   - component: {fileID: 3925027359165989210}
   - component: {fileID: 1849884838}
+  - component: {fileID: 1431235323}
+  - component: {fileID: 6888644668814116042}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -66,7 +68,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 14135
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -115,6 +117,8 @@ MonoBehaviour:
   charMan: {fileID: 0}
   partyMan: {fileID: 0}
   cursMan: {fileID: 0}
+  uiMan: {fileID: 0}
+  interaction: {fileID: 0}
 --- !u!114 &1849884838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +133,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lerpMultiplier: 2
   target: {fileID: 0}
+--- !u!114 &1431235323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925027359165989205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6554ef60c255c642a802e644e94ed7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
+  girlPrefab: {fileID: 6269505518312028497, guid: 4ea27154d4418794f92a73e328b3c561,
+    type: 3}
+--- !u!114 &6888644668814116042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925027359165989205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a353cdee3a71a3a47b4e6f879ae25887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
