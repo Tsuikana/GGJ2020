@@ -78,6 +78,7 @@ public class PartyManager : MonoBehaviour
             partyThirstiness += byeGirlStats.thristiness;
         }
         girlList.Remove(byeGirl);
+        byeGirl.GetComponent<GirlController>().DestroyGirl();
     }
 
     public void gather(GameObject target)

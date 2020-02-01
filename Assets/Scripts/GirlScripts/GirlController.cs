@@ -20,6 +20,10 @@ public class GirlController : MonoBehaviour
         {
             partyManager.girlLeaveParty(this.gameObject);
         }
+    }
+
+    public void DestroyGirl()
+    {
         // Play leave animation
         Destroy(this.gameObject);
     }
@@ -32,7 +36,14 @@ public class GirlController : MonoBehaviour
         var newGirlStats = girl.GetComponent<GirlStats>();
         if (newGirlStats)
         {
-            ownFaction.ReactToGirl(newGirlStats.faction);
+            if (ownFaction)
+            {
+                ownFaction.ReactToGirl(newGirlStats.faction);
+            }
+            else
+            {
+                Debug.Log("Cant find faction.");
+            }
         }
     }
 

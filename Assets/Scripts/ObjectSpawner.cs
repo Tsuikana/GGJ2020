@@ -34,7 +34,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             var newGirl = Instantiate(girlPrefab, spawner.transform.position, Quaternion.identity);
             var newGirlStats = newGirl.GetComponent<GirlStats>();
-            newGirlStats.maxHappiness = Random.Range(5, 10);
+            newGirlStats.maxHappiness = 1;
             newGirlStats.hunting = Random.Range(0, 3);
             newGirlStats.gathering = Random.Range(0, 3);
             newGirlStats.scouting = Random.Range(0, 3);
