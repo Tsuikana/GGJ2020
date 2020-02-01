@@ -49,19 +49,39 @@ public class PartyManager : MonoBehaviour
         if (survivalDegenCurrentTime >= survivalDegenInterval)
         {
             partyHungerTotal -= hungerDegenPerTick + partyHungerConsumed;
+            if (partyHungerTotal <= 0) 
+            {
+                Death("Hunger");
+                Debug.Log("You ran out of food!"); 
+            }
             Debug.Log("Lose Hunger, current hunger: " + partyHungerTotal);
             partyThirstinessTotal -= thirstinessDegenPerTick + partyThirstinessConsumed;
+            if (partyThirstinessTotal <= 0) 
+            {
+                Death("Thirstiness");
+                Debug.Log("You ran out of food!"); 
+            }
             Debug.Log("Lose Thirstiness, current thirstiness: " + partyThirstinessTotal);
             if (!isWarming)
             {
                 partyWarmth -= warmthDegenPerTick;
                 Debug.Log("Lose Warmth, current warmth: " + partyWarmth);
+                if (partyWarmth <= 0) 
+                {
+                    Death("Warmth");
+                    Debug.Log("You've frozen!"); 
+                }
             }
             survivalDegenCurrentTime = 0;
         }
         else {
             survivalDegenCurrentTime += Time.deltaTime;
         }
+    }
+
+    void Death(string deathReason)
+    {
+        //Go to endscreen
     }
 
     public void AddPendingGirl(GameObject newGirl) { pendingPartyGirl = newGirl; }

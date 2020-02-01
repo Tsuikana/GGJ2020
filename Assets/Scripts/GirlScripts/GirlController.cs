@@ -11,7 +11,7 @@ public class GirlController : MonoBehaviour
 
     void Start()
     {
-        //SetDefaults();
+        SetDefaults();
     }
 
     public void UpdateHappiness(float amount)
@@ -67,7 +67,6 @@ public class GirlController : MonoBehaviour
     {
         partyManager = Camera.main.GetComponent<PartyManager>();
         ownStats = this.gameObject.GetComponent<GirlStats>();
-        ownStats.SetDefaults();
         ownFaction = this.gameObject.GetComponent<Faction>();
         ownRole = this.gameObject.GetComponent<Role>();
     }

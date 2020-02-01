@@ -24,7 +24,7 @@ public class GirlStats : MonoBehaviour
 
     void Start()
     {
-        //SetDefaults;
+        SetDefaults();
     }
 
     public void AddToParty()
@@ -43,6 +43,11 @@ public class GirlStats : MonoBehaviour
 
     void SetFaction()
     {
+        var currentFaction = this.gameObject.GetComponent<Faction>();
+        if (currentFaction)
+        {
+            Destroy(currentFaction);
+        }
         switch (faction.ToString())
         {
             case "Red":
@@ -75,6 +80,11 @@ public class GirlStats : MonoBehaviour
 
     void SetRole()
     {
+        var currentRole = this.gameObject.GetComponent<Role>();
+        if (currentRole)
+        {
+            Destroy(currentRole);
+        }
         switch (role.ToString())
         {
             case "Nurse":

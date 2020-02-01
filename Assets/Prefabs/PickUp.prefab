@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6657533172520384296}
   - component: {fileID: 6657533172520384299}
   - component: {fileID: -4210821144689553903}
-  m_Layer: 13
-  m_Name: Hunt_Pig
+  m_Layer: 14
+  m_Name: PickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,3 +113,4 @@ MonoBehaviour:
   hungerUp: 3
   thirstUp: 0
   partsUp: 0
+  environmentType: 0

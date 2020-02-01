@@ -275,16 +275,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pendingPartyGirl: {fileID: 0}
   girlList: []
-  baseInteractDuration: 2
-  partyHunting: 0
-  partyGathering: 0
-  partyScouting: 0
-  partyMobility: 0
-  partyHunger: 0
-  partyThirstiness: 0
-  warmth: 0
-  parts: 0
+  partyHunting: 1
+  partyGathering: 1
+  partyScouting: 1
+  partyMobility: 1
+  partyHungerTotal: 100
+  partyHungerConsumed: 1
+  partyThirstinessTotal: 100
+  partyThirstinessConsumed: 1
+  partyWarmth: 100
+  partyParts: 10
   isBusy: 0
+  isWarming: 0
+  hungerDegenPerTick: 1
+  thirstinessDegenPerTick: 1
+  warmthDegenPerTick: 1
 --- !u!50 &1184656881
 Rigidbody2D:
   serializedVersion: 4
