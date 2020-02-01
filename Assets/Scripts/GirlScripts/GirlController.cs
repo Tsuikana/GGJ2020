@@ -7,6 +7,7 @@ public class GirlController : MonoBehaviour
     private GirlStats ownStats;
     private PartyManager partyManager;
     private Faction ownFaction;
+    private Role ownRole;
 
     void Start()
     {
@@ -42,14 +43,20 @@ public class GirlController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Cant find faction.");
+                Debug.Log("Can't find faction.");
             }
         }
     }
 
-    public void EnvironmentPickup(GameObject pickedUpObject)
+    public void BecomeActive()
     {
-        // Do things depending on what object was picked up
+        this.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        Debug.Log(this.gameObject.GetComponent<Rigidbody2D>().constraints);
+    }
+
+    public void EnvironmentPickup(string pickedUpObject)
+    {
+        ownRole.ReactToPickup(pickedUpObject);
     }
 
     public void EnvironmentEffect()
@@ -63,5 +70,6 @@ public class GirlController : MonoBehaviour
         ownStats = this.gameObject.GetComponent<GirlStats>();
         ownStats.SetDefaults();
         ownFaction = this.gameObject.GetComponent<Faction>();
+        ownRole = this.gameObject.GetComponent<Role>();
     }
 }

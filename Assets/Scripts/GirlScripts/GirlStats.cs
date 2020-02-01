@@ -16,7 +16,7 @@ public class GirlStats : MonoBehaviour
     public float thristiness;
     public bool pickedUp;
 
-    public enum Roles { Nurse, Gatherer, Hunter, Scouter, Plane };
+    public enum Roles { Nurse, Gatherer, Hunter, Scouter, Witch };
     public Roles role;
 
     public enum Factions { Red, Blue, Green, Yellow, Purple };
@@ -30,6 +30,7 @@ public class GirlStats : MonoBehaviour
     public void AddToParty()
     {
         pickedUp = true;
+        this.gameObject.GetComponent<GirlController>().BecomeActive();
     }
 
     public void SetDefaults()
@@ -37,6 +38,7 @@ public class GirlStats : MonoBehaviour
         pickedUp = false;
         currentHappiness = maxHappiness;
         SetFaction();
+        SetRole();
     }
 
     void SetFaction()
@@ -65,6 +67,30 @@ public class GirlStats : MonoBehaviour
                 gathering += Convert.ToSingle(gathering * 0.05);
                 mobility += Convert.ToSingle(mobility * 0.05);
                 scouting += Convert.ToSingle(scouting * 0.05);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void SetRole()
+    {
+        switch (role.ToString())
+        {
+            case "Nurse":
+                this.gameObject.AddComponent<NurseRole>();
+                break;
+            case "Gatherer":
+                this.gameObject.AddComponent<GathererRole>();
+                break;
+            case "Hunter":
+                this.gameObject.AddComponent<HunterRole>();
+                break;
+            case "Scouter":
+                this.gameObject.AddComponent<ScouterRole>();
+                break;
+            case "Witch":
+                this.gameObject.AddComponent<WitchRole>();
                 break;
             default:
                 break;

@@ -55,7 +55,7 @@ public class PartyManager : MonoBehaviour
 
         if (newGirlStats)
         {
-            newGirlStats.pickedUp = true;
+            newGirlStats.AddToParty();
             partyGathering += newGirlStats.gathering;
             partyHunting += newGirlStats.hunting;
             partyScouting += newGirlStats.scouting;
@@ -85,11 +85,21 @@ public class PartyManager : MonoBehaviour
     {
         Debug.Log("Gathering " + target.name);
         Destroy(target);
+        
+        foreach (var girl in girlList)
+        {
+            girl.GetComponent<GirlController>().EnvironmentPickup("Gather");
+        }
     }
 
     public void hunt(GameObject target)
     {
         Debug.Log("Hunting " + target.name);
         Destroy(target);
+		
+        foreach (var girl in girlList)
+        {
+            girl.GetComponent<GirlController>().EnvironmentPickup("Hunt");
+        }
     }
 }
