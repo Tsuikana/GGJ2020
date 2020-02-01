@@ -19,9 +19,9 @@ public class MovementControllerGirls : MovementController
         if (this.gameObject.GetComponent<GirlStats>().pickedUp)
         {
             //Set movement position target to index 0 of target object's previous position list
-            if (targetMoveCtrlMc.hasNewTarget && targetMoveCtrlMc.prevPosList.Count == targetMoveCtrlMc.maxPosListSize)
+            if (targetMoveCtrlMc.hasMoveTarget && targetMoveCtrlMc.prevPosList.Count == targetMoveCtrlMc.maxPosListSize)
             {
-                hasNewTarget = true;
+                hasMoveTarget = true;
                 newMoveTarget = targetMoveCtrlMc.prevPosList[0];
             }
 

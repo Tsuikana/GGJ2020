@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    public float moveSpeed = 8f;
-    public float minMoveThresh = 0.1f;
+    public float moveSpeed = 1f;
+    public float minMoveThresh = 0.01f;
 
     public float TimeScaledMoveSpeed {
         get

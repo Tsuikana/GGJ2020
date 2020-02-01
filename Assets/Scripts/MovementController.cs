@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     public float travelDist = 0.0f;
-    public bool hasNewTarget;
+    public bool hasMoveTarget;
     public Vector2 newMoveTarget;
 
     public GameObject target;
@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour
     protected virtual void Update()
     {
         //If there's a target position to move to
-        if (hasNewTarget)
+        if (hasMoveTarget)
         {
             //Checks if object should move to the target
             if (ShouldMoveToTarget(newMoveTarget))
@@ -41,9 +41,9 @@ public class MovementController : MonoBehaviour
                 transform.position = newMoveTarget;
                 
                 //Only stop chasing target if mouse button up
-                if (!gameMan.cursMan.mouseDown)
+                if (!gameMan.cursMan.rMouseDown)
                 {
-                    hasNewTarget = false;
+                    hasMoveTarget = false;
                 }
             }
         }
@@ -51,7 +51,7 @@ public class MovementController : MonoBehaviour
 
     protected virtual void SetDefaults()
     {
-        hasNewTarget = false;
+        hasMoveTarget = false;
         newMoveTarget = Vector2.zero;
         gameMan = Camera.main.GetComponent<GameManager>();
     }

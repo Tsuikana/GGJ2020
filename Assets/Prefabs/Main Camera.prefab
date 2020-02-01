@@ -113,19 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charMan: {fileID: 0}
+  partyMan: {fileID: 0}
   cursMan: {fileID: 0}
-  girlList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  partyHunting: 0
-  partyGathering: 0
-  partyScouting: 0
-  partyMobility: 0
-  hunger: 0
-  thirstiness: 0
-  warmth: 0
-  THEME: 0
 --- !u!114 &1849884838
 MonoBehaviour:
   m_ObjectHideFlags: 0
