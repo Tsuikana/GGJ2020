@@ -19,7 +19,7 @@ public class GirlController : MonoBehaviour
         ownStats.currentHappiness -= amount;
         if (ownStats.currentHappiness <= 0)
         {
-            partyManager.girlLeaveParty(this.gameObject);
+            partyManager.GirlLeaveParty(this.gameObject);
         }
     }
 
@@ -51,12 +51,11 @@ public class GirlController : MonoBehaviour
     public void BecomeActive()
     {
         this.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        Debug.Log(this.gameObject.GetComponent<Rigidbody2D>().constraints);
     }
 
-    public void EnvironmentPickup(string pickedUpObject)
+    public void EnvironmentPickup(PickUps.PickUpType environmentType)
     {
-        ownRole.ReactToPickup(pickedUpObject);
+        ownRole.ReactToPickup(environmentType.ToString());
     }
 
     public void EnvironmentEffect()

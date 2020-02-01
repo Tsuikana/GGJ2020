@@ -12,8 +12,8 @@ public class GirlStats : MonoBehaviour
     public float scouting;
     public float mobility;
     // Add to party manager
-    public int hunger;
-    public int thristiness;
+    public float hungerConsumed;
+    public float thristinessConsumed;
     public bool pickedUp;
 
     public enum Roles { Nurse, Gatherer, Hunter, Scouter, Witch };

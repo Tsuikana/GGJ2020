@@ -39,8 +39,8 @@ public class ObjectSpawner : MonoBehaviour
             newGirlStats.gathering = Random.Range(0, 3);
             newGirlStats.scouting = Random.Range(0, 3);
             newGirlStats.mobility = Random.Range(0, 3);
-            newGirlStats.hunger = Random.Range(0, 2);
-            newGirlStats.thristiness = Random.Range(0, 2);
+            newGirlStats.hungerConsumed = Random.Range(0, 1);
+            newGirlStats.thristinessConsumed = Random.Range(0, 1);
             newGirlStats.role = (GirlStats.Roles)roleList.GetValue(rnd.Next(roleList.Length));
             newGirlStats.faction = (GirlStats.Factions)factionList.GetValue(rnd.Next(factionList.Length));
 

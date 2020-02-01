@@ -10,11 +10,22 @@ public class PartyManager : MonoBehaviour
     public float partyGathering;
     public float partyScouting;
     public float partyMobility;
-    public int partyHunger;
-    public int partyThirstiness;
+
+    public float partyHungerTotal;
+    public float partyHungerConsumed;
+    public float partyThirstinessTotal;
+    public float partyThirstinessConsumed;
+
     public int partyWarmth;
     public int partyParts;
     public bool isBusy;
+    public bool isWarming; //Only sent to true when in collider of fire
+
+    private float survivalDegenInterval;
+    public int hungerDegenPerTick;
+    public int thirstinessDegenPerTick;
+    public int warmthDegenPerTick;
+    private float survivalDegenCurrentTime;
 
     // Start is called before the first frame update
     void Start()
@@ -25,14 +36,32 @@ public class PartyManager : MonoBehaviour
     void SetDefaults()
     {
         isBusy = false;
+        isWarming = false;
         pendingPartyGirl = null;    
         girlList = new List<GameObject>();
+        survivalDegenInterval = 5;
+        survivalDegenCurrentTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (survivalDegenCurrentTime >= survivalDegenInterval)
+        {
+            partyHungerTotal -= hungerDegenPerTick + partyHungerConsumed;
+            Debug.Log("Lose Hunger, current hunger: " + partyHungerTotal);
+            partyThirstinessTotal -= thirstinessDegenPerTick + partyThirstinessConsumed;
+            Debug.Log("Lose Thirstiness, current thirstiness: " + partyThirstinessTotal);
+            if (!isWarming)
+            {
+                partyWarmth -= warmthDegenPerTick;
+                Debug.Log("Lose Warmth, current warmth: " + partyWarmth);
+            }
+            survivalDegenCurrentTime = 0;
+        }
+        else {
+            survivalDegenCurrentTime += Time.deltaTime;
+        }
     }
 
     public void AddPendingGirl(GameObject newGirl) { pendingPartyGirl = newGirl; }
@@ -42,8 +71,9 @@ public class PartyManager : MonoBehaviour
         set { isBusy = value; }
     }
 
-    public void addGirlToParty()
+    public void AddGirlToParty()
     {
+        if (girlList.Contains(pendingPartyGirl)) { return; }
         pendingPartyGirl.GetComponent<MovementControllerGirls>().FollowMc();
 
         foreach (var girl in girlList){
@@ -59,12 +89,12 @@ public class PartyManager : MonoBehaviour
             partyHunting += newGirlStats.hunting;
             partyScouting += newGirlStats.scouting;
             partyMobility += newGirlStats.mobility;
-            partyHunger += newGirlStats.hunger;
-            partyThirstiness += newGirlStats.thristiness;
+            partyHungerConsumed += newGirlStats.hungerConsumed;
+            partyThirstinessConsumed += newGirlStats.thristinessConsumed;
         }
     }
 
-    public void girlLeaveParty(GameObject byeGirl)
+    public void GirlLeaveParty(GameObject byeGirl)
     {
         var byeGirlStats = byeGirl.GetComponent<GirlStats>();
         if (byeGirlStats)
@@ -73,17 +103,41 @@ public class PartyManager : MonoBehaviour
             partyHunting -= byeGirlStats.hunting;
             partyScouting -= byeGirlStats.scouting;
             partyMobility -= byeGirlStats.mobility;
-            partyHunger += byeGirlStats.hunger;
-            partyThirstiness += byeGirlStats.thristiness;
+            partyHungerConsumed += byeGirlStats.hungerConsumed;
+            partyThirstinessConsumed += byeGirlStats.thristinessConsumed;
         }
         girlList.Remove(byeGirl);
         byeGirl.GetComponent<GirlController>().DestroyGirl();
     }
 
-    public void pickUp(int thirstUp, int hungerUp, int partsUp)
+    public void PickUp(int thirstUp, int hungerUp, int partsUp, PickUps.PickUpType environmentType)
     {
-        partyThirstiness += thirstUp;
-        partyHunger += hungerUp;
-        partyParts += partsUp;
+        bool safeEnvironment = true;
+        if (environmentType.ToString() == "Cactus")
+        {
+            if (partyGathering < 50)
+            {
+                safeEnvironment = false;
+            }
+        }
+
+        if (safeEnvironment)
+        {
+            partyThirstinessTotal += thirstUp;
+            partyHungerTotal += hungerUp;
+            partyParts += partsUp;
+
+            foreach (var girl in girlList)
+            {
+                girl.GetComponent<GirlController>().EnvironmentPickup(environmentType);
+            }
+        }
+        else
+        {
+            foreach (var girl in girlList)
+            {
+                girl.GetComponent<GirlController>().UpdateHappiness(-1);
+            }
+        }
     }
 }

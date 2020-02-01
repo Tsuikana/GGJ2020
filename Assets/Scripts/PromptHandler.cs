@@ -34,7 +34,7 @@ public class PromptHandler : MonoBehaviour
 
     public void ShowPrompt()
     {
-        SetDefaults();
+        //SetDefaults();
     }
 
     public void ClosePrompt()
@@ -45,7 +45,7 @@ public class PromptHandler : MonoBehaviour
 
     void OnClickYes()
     {
-        gameMan.partyMan.addGirlToParty();
+        gameMan.partyMan.AddGirlToParty();
         ClosePrompt();
     }
 

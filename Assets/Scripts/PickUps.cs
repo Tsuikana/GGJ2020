@@ -7,6 +7,9 @@ public class PickUps : MonoBehaviour
     public int hungerUp;
     public int thirstUp;
     public int partsUp;
+
+    public enum PickUpType { Chicken, Cabbage, Bucket_Water, Cactus, Hamburger, Soda, TV_Dinner, Gatorade, Parts };
+    public PickUpType environmentType;
     
     private GameManager gameMan;
 
@@ -30,7 +33,7 @@ public class PickUps : MonoBehaviour
     public void Use()
     {
         Debug.Log("Picking up " + name);
-        gameMan.partyMan.pickUp(thirstUp, hungerUp, partsUp);
+        gameMan.partyMan.PickUp(thirstUp, hungerUp, partsUp, environmentType);
         Destroy(gameObject);
     }
 }
