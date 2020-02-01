@@ -28,6 +28,9 @@ public class MapGenerator : MonoBehaviour
     public Transform sprite;
 
     public Tilemap currentMap;
+    public Tilemap huntTilemap;
+    public Tilemap gatherTilemap;
+    public Tilemap warmthTilemap;
     private MapHelper.Region currentRegion;
     public TileBase testTile;
     MapHelper mapHelper;
@@ -104,9 +107,51 @@ public class MapGenerator : MonoBehaviour
             //print("new locs " + newLoc.location);
             newLocs.Add(newLoc);
         }
+        CopyProps(from, start, matchingLoc);
 
         tileNum++;
 
+    }
+
+    public void CopyProps(Tilemap from, Locator dest, Locator start)
+    {
+        Tilemap to;
+        foreach (Transform child in from.transform)
+        {
+            Tilemap propTilemap = child.GetComponent<Tilemap>();
+
+            int type = child.gameObject.layer;
+            print("layer num type: " + type);
+
+            switch (type)
+            {
+                case 12:
+                    to = gatherTilemap;
+                    break;
+                case 13:
+                    to = huntTilemap;
+                    break;
+                case 14:
+                    to = warmthTilemap;
+                    break;
+                default:
+                    Debug.LogError("prop without a proper layer set!");
+                    return;
+            }
+
+            print(to);
+            foreach (var pos in propTilemap.cellBounds.allPositionsWithin)
+            {
+                Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
+                if (propTilemap.HasTile(localPlace))
+                {
+                    //print("copy prop: " + localPlace);
+                    TileBase tile = propTilemap.GetTile(localPlace);
+                    to.SetTile(new Vector3Int(-7 + localPlace.x + ((int)dest.location.x - (int)start.location.x),
+                         localPlace.y + ((int)dest.location.y - (int)start.location.y), 0), tile);
+                }
+            }
+        }
     }
 
     public GameObject[] FindTile(GameObject[] tileset, Locator nextLoc)
@@ -378,7 +423,7 @@ public class MapGenerator : MonoBehaviour
         }
         else if (currentRegion == MapHelper.Region.City)
         {
-            currentTileSet = forestTiles;//cityTiles;
+            currentTileSet = cityTiles;
         }
         else if (currentRegion == MapHelper.Region.Neon)
         {
