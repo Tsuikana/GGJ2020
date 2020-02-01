@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public PartyManager partyMan;
     public CursorManager cursMan;
     public UIManager uiMan;
+    public Interaction interaction;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     void SetDefaults()
     {
         charMan = GetComponent<CharacterManager>();
+        interaction = GetComponent<Interaction>();
         cursMan = FindObjectOfType<CursorManager>();
         partyMan = FindObjectOfType<PartyManager>();
         uiMan = FindObjectOfType<UIManager>();

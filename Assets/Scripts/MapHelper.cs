@@ -9,8 +9,8 @@ public class MapHelper: MonoBehaviour
     {
         Forest,
         Desert,
-        Snow,
-        Swamp
+        City,
+        Neon,
     }
 
     public int[,] grid;

@@ -42,7 +42,7 @@ public class CursorManager : MonoBehaviour
         }
 
         // Stores RMB click point and target object
-        if (Input.GetMouseButton(1) && !gameMan.partyMan.isBusy)
+        if (Input.GetMouseButton(1) && !gameMan.partyMan.IsBusy)
         {
             var hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             foreach (RaycastHit2D hit in hits)
@@ -51,7 +51,8 @@ public class CursorManager : MonoBehaviour
                 if (hit.collider != null && clickTarget == null)
                 {
                     // Checks for hitting non-BG objects on frame that RMB is clicked
-                    if (!hit.collider.gameObject.layer.Equals(bgLayerId) && !rMouseDown)
+                    var hitLayer = hit.collider.gameObject.layer;
+                    if (hitLayer != bgLayerId && !rMouseDown)
                     {
                         clickTarget = hit.collider.gameObject;
                     }

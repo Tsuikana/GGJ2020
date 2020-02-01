@@ -24,8 +24,7 @@ public class GirlStats : MonoBehaviour
 
     void Start()
     {
-        SetDefaults();
-        SetFaction();
+        //SetDefaults;
     }
 
     public void AddToParty()
@@ -33,10 +32,11 @@ public class GirlStats : MonoBehaviour
         pickedUp = true;
     }
 
-    void SetDefaults()
+    public void SetDefaults()
     {
         pickedUp = false;
         currentHappiness = maxHappiness;
+        SetFaction();
     }
 
     void SetFaction()
