@@ -13,10 +13,11 @@ public class MapHelper: MonoBehaviour
         Swamp
     }
 
-    int[,] grid;
+    public int[,] grid;
 
     public enum ConnectionReqs
     {
+        none,
         river,
         bridge,
 
