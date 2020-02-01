@@ -11,10 +11,13 @@ public class GirlStats : MonoBehaviour
     public float gathering;
     public float scouting;
     public float mobility;
-    public Boolean pickedUp;
+    public bool pickedUp;
 
-    public string faction;
-    public string role;
+    public enum Roles { Nurse, Gatherer, Hunter, Scouter, Plane };
+    public Roles role;
+
+    public enum Factions { Red, Blue, Green, Yellow, Purple };
+    public Factions faction;
 
     void Start()
     {
@@ -35,22 +38,26 @@ public class GirlStats : MonoBehaviour
 
     void SetFaction()
     {
-        // Probably colour the girl to the faction's colour here as well
-        switch (faction)
+        switch (faction.ToString())
         {
             case "Red":
+                this.gameObject.AddComponent<RedFaction>();
                 hunting += Convert.ToSingle(hunting * 0.25);
                 break;
             case "Green":
+                this.gameObject.AddComponent<GreenFaction>();
                 scouting += Convert.ToSingle(scouting * 0.25);
                 break;
             case "Yellow":
+                this.gameObject.AddComponent<YellowFaction>();
                 mobility += Convert.ToSingle(mobility * 0.25);
                 break;
             case "Blue":
+                this.gameObject.AddComponent<BlueFaction>();
                 gathering += Convert.ToSingle(gathering * 0.25);
                 break;
             case "Purple":
+                this.gameObject.AddComponent<PurpleFaction>();
                 hunting += Convert.ToSingle(hunting * 0.05);
                 gathering += Convert.ToSingle(gathering * 0.05);
                 mobility += Convert.ToSingle(mobility * 0.05);

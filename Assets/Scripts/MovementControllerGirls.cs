@@ -5,7 +5,6 @@ using UnityEngine;
 public class MovementControllerGirls : MovementController
 {
     public MovementControllerMc targetMoveCtrlMc;
-    public MCManager mc;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -35,6 +34,5 @@ public class MovementControllerGirls : MovementController
         base.SetDefaults();
         targetMoveCtrlMc = FindObjectOfType<MovementControllerMc>();
         target = targetMoveCtrlMc.gameObject;
-        mc = FindObjectOfType<MCManager>();
     }
 }

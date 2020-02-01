@@ -33,6 +33,9 @@ public class PartyManager : MonoBehaviour
 
     public void addGirlToParty(GameObject newGirl)
     {
+        foreach (var girl in girlList){
+            girl.GetComponent<GirlController>().GirlAdded(newGirl);
+        }
         girlList.Add(newGirl);
         var newGirlStats = newGirl.GetComponent<GirlStats>();
         if (newGirlStats)

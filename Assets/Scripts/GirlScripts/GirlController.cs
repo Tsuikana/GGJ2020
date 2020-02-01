@@ -6,36 +6,14 @@ public class GirlController : MonoBehaviour
 {
     private GirlStats ownStats;
     private PartyManager partyManager;
-    private MCManager mcManager;
+    private Faction ownFaction;
 
     void Start()
     {
         SetDefaults();
     }
 
-    // Recieve action done by MC (Called from Game Manager)
-    public void ActionTaken()
-    {
-        switch (ownStats.faction)
-        {
-            case "Red":
-                break;
-            case "Green":
-                break;
-            case "Yellow":
-                break;
-            case "Blue":
-                break;
-            case "Purple":
-                break;
-            default:
-                break;
-        }
-
-        UpdateHappiness(1);
-    }
-
-    void UpdateHappiness(float amount)
+    public void UpdateHappiness(float amount)
     {
         ownStats.currentHappiness -= amount;
         if (ownStats.currentHappiness <= 0)
@@ -46,10 +24,19 @@ public class GirlController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void GirlAdded(GameObject girl)
+    {
+        var newGirlStats = girl.GetComponent<GirlStats>();
+        if (newGirlStats)
+        {
+            ownFaction.ReactToGirl(newGirlStats.faction);
+        }
+    }
+
     void SetDefaults() 
     {
         partyManager = Camera.main.GetComponent<PartyManager>();
         ownStats = this.gameObject.GetComponent<GirlStats>();
-        mcManager = FindObjectOfType<MCManager>();
+        ownFaction = this.gameObject.GetComponent<Faction>();
     }
 }
