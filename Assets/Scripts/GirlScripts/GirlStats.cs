@@ -5,32 +5,52 @@ using System;
 
 public class GirlStats : MonoBehaviour
 {
-    public float happiness;
+    public float maxHappiness;
+    public float currentHappiness;
     public float hunting;
     public float gathering;
     public float scouting;
     public float mobility;
+    public Boolean pickedUp;
 
-    public string element;
-    public string type;
+    public string faction;
+    public string role;
 
     void Start()
     {
-        switch (element)
+        SetDefaults();
+        SetFaction();
+    }
+
+    public void AddToParty()
+    {
+        pickedUp = true;
+    }
+
+    void SetDefaults()
+    {
+        pickedUp = false;
+        currentHappiness = maxHappiness;
+    }
+
+    void SetFaction()
+    {
+        // Probably colour the girl to the faction's colour here as well
+        switch (faction)
         {
-            case "Fire":
+            case "Red":
                 hunting += Convert.ToSingle(hunting * 0.25);
                 break;
-            case "Wind":
+            case "Green":
                 scouting += Convert.ToSingle(scouting * 0.25);
                 break;
-            case "Lightning":
+            case "Yellow":
                 mobility += Convert.ToSingle(mobility * 0.25);
                 break;
-            case "Water":
+            case "Blue":
                 gathering += Convert.ToSingle(gathering * 0.25);
                 break;
-            case "Earth":
+            case "Purple":
                 hunting += Convert.ToSingle(hunting * 0.05);
                 gathering += Convert.ToSingle(gathering * 0.05);
                 mobility += Convert.ToSingle(mobility * 0.05);
@@ -39,10 +59,5 @@ public class GirlStats : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    public void decreaseHappiness(float lostHappiness)
-    {
-        happiness -= lostHappiness;
     }
 }

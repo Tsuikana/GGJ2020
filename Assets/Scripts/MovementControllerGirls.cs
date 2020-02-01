@@ -5,6 +5,7 @@ using UnityEngine;
 public class MovementControllerGirls : MovementController
 {
     public MovementControllerMc targetMoveCtrlMc;
+    public MCManager mc;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -15,15 +16,18 @@ public class MovementControllerGirls : MovementController
     // Update is called once per frame
     protected override void Update()
     {
-        //Set movement position target to index 0 of target object's previous position list
-        if (targetMoveCtrlMc.hasNewTarget && targetMoveCtrlMc.prevPosList.Count == targetMoveCtrlMc.maxPosListSize)
+        if (this.gameObject.GetComponent<GirlStats>().pickedUp)
         {
-            hasNewTarget = true;
-            newMoveTarget = targetMoveCtrlMc.prevPosList[0];
-        }
+            //Set movement position target to index 0 of target object's previous position list
+            if (targetMoveCtrlMc.hasNewTarget && targetMoveCtrlMc.prevPosList.Count == targetMoveCtrlMc.maxPosListSize)
+            {
+                hasNewTarget = true;
+                newMoveTarget = targetMoveCtrlMc.prevPosList[0];
+            }
 
-        //Move
-        base.Update();
+            //Move
+            base.Update();
+        }
     }
 
     protected override void SetDefaults()
@@ -31,5 +35,6 @@ public class MovementControllerGirls : MovementController
         base.SetDefaults();
         targetMoveCtrlMc = FindObjectOfType<MovementControllerMc>();
         target = targetMoveCtrlMc.gameObject;
+        mc = FindObjectOfType<MCManager>();
     }
 }
