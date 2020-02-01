@@ -22,7 +22,8 @@ public class CursorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        // Stores RMB target point
+        if (Input.GetMouseButton(1))
         {
             mouseDown = true;
 
