@@ -46,6 +46,7 @@ public class PromptHandler : MonoBehaviour
 
     void OnClickNo()
     {
+        gameMan.partyMan.RemovePendingGirl();
         ClosePrompt();
     }
 }

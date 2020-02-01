@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
 
     public void PromptRecruit(GameObject girl)
     {
-        gameMan.partyMan.pendingPartyGirl = girl;
+        gameMan.partyMan.AddPendingGirl(girl);
         promptHandler.gameObject.SetActive(true);
     }
 }
