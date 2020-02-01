@@ -30,7 +30,9 @@ public class MovementControllerMc : MovementController
             gameMan.cursMan.hasMoveTarget = false;
 
             //If the Cursor has clicked on a target and they are within interactable distance, prompt to collect
-            if (gameMan.cursMan.clickTarget != null && CanInteract(gameMan.cursMan.clickTarget))
+            if (gameMan.cursMan.clickTarget != null && 
+                CanInteract(gameMan.cursMan.clickTarget) && 
+                !IsPickedUp(gameMan.cursMan.clickTarget))
             {
                 gameMan.partyMan.isBusy = true;
                 gameMan.uiMan.PromptRecruit(gameMan.cursMan.clickTarget);
@@ -71,6 +73,16 @@ public class MovementControllerMc : MovementController
     private bool CanInteract(GameObject targetObject)
     {
         if (Vector2.Distance(transform.position, targetObject.transform.position) < minInteractDistance)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool IsPickedUp(GameObject targetObject)
+    {
+        var girlStats = targetObject.GetComponent<GirlStats>();
+        if (girlStats && girlStats.pickedUp)
         {
             return true;
         }
