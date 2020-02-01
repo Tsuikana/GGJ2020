@@ -10,8 +10,8 @@ public class PartyManager : MonoBehaviour
     public float partyGathering;
     public float partyScouting;
     public float partyMobility;
-    public float hunger;
-    public float thirstiness;
+    public float partyHunger;
+    public float partyThirstiness;
     public float warmth;
     public float parts;
     public bool isBusy;
@@ -35,6 +35,9 @@ public class PartyManager : MonoBehaviour
         
     }
 
+    public void AddPendingGirl(GameObject newGirl) { pendingPartyGirl = newGirl; }
+    public void RemovePendingGirl() { pendingPartyGirl = null; }
+
     public void addGirlToParty()
     {
         pendingPartyGirl.GetComponent<MovementControllerGirls>().FollowMc();
@@ -52,6 +55,8 @@ public class PartyManager : MonoBehaviour
             partyHunting += newGirlStats.hunting;
             partyScouting += newGirlStats.scouting;
             partyMobility += newGirlStats.mobility;
+            partyHunger += newGirlStats.hunger;
+            partyThirstiness += newGirlStats.thristiness;
         }
     }
 
@@ -64,6 +69,8 @@ public class PartyManager : MonoBehaviour
             partyHunting -= byeGirlStats.hunting;
             partyScouting -= byeGirlStats.scouting;
             partyMobility -= byeGirlStats.mobility;
+            partyHunger += byeGirlStats.hunger;
+            partyThirstiness += byeGirlStats.thristiness;
         }
         girlList.Remove(byeGirl);
     }

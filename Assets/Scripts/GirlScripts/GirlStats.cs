@@ -11,6 +11,9 @@ public class GirlStats : MonoBehaviour
     public float gathering;
     public float scouting;
     public float mobility;
+    // Add to party manager
+    public float hunger;
+    public float thristiness;
     public bool pickedUp;
 
     public enum Roles { Nurse, Gatherer, Hunter, Scouter, Plane };

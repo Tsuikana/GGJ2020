@@ -36,6 +36,16 @@ public class GirlController : MonoBehaviour
         }
     }
 
+    public void EnvironmentPickup(GameObject pickedUpObject)
+    {
+        // Do things depending on what object was picked up
+    }
+
+    public void EnvironmentEffect()
+    {
+
+    }
+
     void SetDefaults() 
     {
         partyManager = Camera.main.GetComponent<PartyManager>();
