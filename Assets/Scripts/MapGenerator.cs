@@ -23,6 +23,7 @@ public class MapGenerator : MonoBehaviour
     public Transform sprite;
 
     public Tilemap currentMap;
+    public currentRegion;
     public TileBase testTile;
     MapHelper mapHelper;
 
@@ -282,7 +283,7 @@ public class MapGenerator : MonoBehaviour
 
         //todo - always start with start spawn piece
 
-        MapHelper.Region currentRegion = MapHelper.Region.Forest;//(MapHelper.Region)Random.Range(0, 3);
+        //MapHelper.Region currentRegion = MapHelper.Region.Forest;//(MapHelper.Region)Random.Range(0, 3);
         difficulty = difficulty++;
         int regionSize = 20;//UnityEngine.Random.Range(regionMinSize, regionMaxSize);
         int resourceNum = Mathf.CeilToInt((regionSize * 0.2f) * (difficulty * 0.3f) + (float)UnityEngine.Random.Range(0, 3));
