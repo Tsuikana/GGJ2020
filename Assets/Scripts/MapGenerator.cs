@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour
     public Transform sprite;
 
     public Tilemap currentMap;
-    public currentRegion;
+    public MapHelper.Region currentRegion;
     public TileBase testTile;
     MapHelper mapHelper;
 
