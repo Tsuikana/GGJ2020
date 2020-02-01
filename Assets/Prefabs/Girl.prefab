@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 6269505518312028495}
   - component: {fileID: 6269505518312028494}
   - component: {fileID: 6625745079487640016}
+  - component: {fileID: 7811233940952117614}
   m_Layer: 9
   m_Name: Girl
   m_TagString: Untagged
@@ -203,3 +204,19 @@ MonoBehaviour:
   pickedUp: 0
   faction: 
   role: 
+--- !u!58 &7811233940952117614
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269505518312028497}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1

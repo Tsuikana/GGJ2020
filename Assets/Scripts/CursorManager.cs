@@ -9,7 +9,6 @@ public class CursorManager : MonoBehaviour
     public GameObject clickTarget;
 
     private int bgLayerId;
-    private int girlsLayerId;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +22,6 @@ public class CursorManager : MonoBehaviour
         rMouseDown = false;
         clickTarget = null;
         bgLayerId = LayerMask.NameToLayer("background");
-        girlsLayerId = LayerMask.NameToLayer("girls");
     }
 
     // Update is called once per frame
@@ -35,21 +33,30 @@ public class CursorManager : MonoBehaviour
 
         }
 
-        // Stores RMB target point
+        // Rest clickTarget on RMB down frame
+        if (Input.GetMouseButtonDown(1))
+        {
+            clickTarget = null;
+        }
+
+        // Stores RMB click point and target object
         if (Input.GetMouseButton(1))
         {
-            rMouseDown = true;
-
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null)
+            var hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            foreach (RaycastHit2D hit in hits)
             {
-                clickTarget = null;
-                if (!hit.collider.gameObject.layer.Equals(bgLayerId))
+                // Having a clickTarget means we've selected something, so we don't want to move on holding RMB
+                if (hit.collider != null && clickTarget == null)
                 {
-                    clickTarget = hit.collider.gameObject;
+                    // Checks for hitting non-BG objects on frame that RMB is clicked
+                    if (!hit.collider.gameObject.layer.Equals(bgLayerId) && !rMouseDown)
+                    {
+                        clickTarget = hit.collider.gameObject;
+                    }
+                    SetMoveTarget(hit.point);
                 }
-                SetMoveTarget(hit.point);
             }
+            rMouseDown = true;
         }
         else
         {
