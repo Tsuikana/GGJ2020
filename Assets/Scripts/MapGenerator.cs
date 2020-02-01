@@ -16,6 +16,7 @@ public class MapGenerator : MonoBehaviour
     public int regionMaxSize = 20;
 
     public GameObject[] forestTiles;
+    public GameObject[] desertTiles;
 
     public int difficulty = 0;
 
@@ -40,6 +41,7 @@ public class MapGenerator : MonoBehaviour
         //Important note: place your prefabs folder(or levels or whatever) 
         //in a folder called "Resources" like this "Assets/Resources/Prefabs"
         forestTiles = Resources.LoadAll<GameObject>("MapTiles/Forest");
+        desertTiles = Resources.LoadAll<GameObject>("MapTiles/Desert");
 
         GenerateMap();
     }
@@ -59,16 +61,15 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    public void CopyTiles(Tilemap to, Tilemap from, Locator start, out Locator matchingLoc)
+    public void CopyTiles(Tilemap to, Tilemap from, Locator start, out List<Locator> newLocs)
     {
         print("add new tile");
         print(start.location);
-        matchingLoc = MatchingLoc(from.GetComponent<TileStats>(), start.dir);
+        Locator matchingLoc = MatchingLoc(from.GetComponent<TileStats>(), start.dir);
         print(matchingLoc.location);
         foreach (var pos in from.cellBounds.allPositionsWithin)
         {
             Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
-            Vector3 place = from.CellToWorld(localPlace);
             if (from.HasTile(localPlace))
             {
                 TileBase tile = from.GetTile(localPlace);
@@ -76,6 +77,25 @@ public class MapGenerator : MonoBehaviour
                     localPlace.y + ((int)start.location.y - (int)matchingLoc.location.y), 0), tile);
             }
         }
+
+        List<Locator> locs = from.GetComponent<TileStats>().locators;
+
+        newLocs = new List<Locator>();
+
+        foreach(Locator l in locs)
+        {
+            if(l.location == matchingLoc.location)
+            {
+                continue;
+            }
+            Locator newLoc = l;
+            //print("old loc: " + l.location);
+            newLoc.location.x = l.location.x + ((int)start.location.x - (int)matchingLoc.location.x);
+            newLoc.location.y = l.location.y + ((int)start.location.y - (int)matchingLoc.location.y);
+            //print("new locs " + newLoc.location);
+            newLocs.Add(newLoc);
+        }
+
     }
 
     public GameObject[] FindTile(GameObject[] tileset, Locator nextLoc)
@@ -183,6 +203,63 @@ public class MapGenerator : MonoBehaviour
         return matchArray[UnityEngine.Random.Range(0, matchArray.Length)];
     }
 
+    public bool CheckLocatorOverlap(int xPos, int yPos, MapHelper.LocatorDirection dir)
+    {
+        switch (dir)
+        {
+            case MapHelper.LocatorDirection.North:
+                for (int i = -2; i < 5; i++)
+                {
+                    for (int j = 1; j < 10; j++)
+                    {
+                        if (currentMap.HasTile(new Vector3Int(xPos + i, yPos + j, 0)))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                break;
+            case MapHelper.LocatorDirection.East:
+                for (int i = -1; i > -10; i--)
+                {
+                    for (int j = -2; j < 5; j++)
+                    {
+                        if (currentMap.HasTile(new Vector3Int(xPos + i, yPos + j, 0)))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                break;
+            case MapHelper.LocatorDirection.South:
+                for (int i = -2; i < 5; i++)
+                {
+                    for (int j = -1; j > -10; j--)
+                    {
+                        if (currentMap.HasTile(new Vector3Int(xPos + i, yPos + j, 0)))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                break;
+            case MapHelper.LocatorDirection.West:
+                for (int i = 1; i < 10; i++)
+                {
+                    for (int j = -2; j < 5; j++)
+                    {
+                        if (currentMap.HasTile(new Vector3Int(xPos + i, yPos + j, 0)))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                break;
+        }
+
+        return false;
+    }
+
     public void GenerateMap()
     {
         //currentMap = GetComponent<Tilemap>();
@@ -207,7 +284,7 @@ public class MapGenerator : MonoBehaviour
 
         MapHelper.Region currentRegion = MapHelper.Region.Forest;//(MapHelper.Region)Random.Range(0, 3);
         difficulty = difficulty++;
-        int regionSize = 3;//UnityEngine.Random.Range(regionMinSize, regionMaxSize);
+        int regionSize = 20;//UnityEngine.Random.Range(regionMinSize, regionMaxSize);
         int resourceNum = Mathf.CeilToInt((regionSize * 0.2f) * (difficulty * 0.3f) + (float)UnityEngine.Random.Range(0, 3));
         int currentRegionSize = 0;
 
@@ -223,8 +300,12 @@ public class MapGenerator : MonoBehaviour
         {
             currentTileSet = forestTiles;
         }
+        else if (currentRegion == MapHelper.Region.Desert)
+        {
+            currentTileSet = desertTiles;
+        }
 
-        GameObject currentTile = forestTiles[UnityEngine.Random.Range(0, forestTiles.Length)];
+        GameObject currentTile = currentTileSet[UnityEngine.Random.Range(0, forestTiles.Length)];
 
 
         Tilemap prefabTilemap = currentTile.GetComponent<Tilemap>();
@@ -236,58 +317,66 @@ public class MapGenerator : MonoBehaviour
         print("add first tile");
         print(prefabTilemap);
         CopyTiles(currentMap, prefabTilemap, 0, 0);//startX, startY);
-        foreach (Locator loc in prefabTilemap.GetComponent<TileStats>().locators)
-        {
-            openLocators.Add(loc);
-        }
+        openLocators.AddRange(prefabTilemap.GetComponent<TileStats>().locators);
+        print("locator list count: " + prefabTilemap.GetComponent<TileStats>().locators.Count);
+        print("locator count: " + openLocators.Count);
 
         //get random locator
         for (int x = 1; x < regionSize; x++)
         {
-            print("print tile loop: " + x);
+            if(openLocators.Count < 1)
+            {
+                Debug.LogError("No more locators!");
+                return;
+            }
             bool locatorFound = false;
+            int y = 0;
             while (!locatorFound)
             {
-                if(openLocators.Count == 0)
-                {
-                    if(closedLocators.Count == 0)
-                    {
-                        Debug.LogError("No Locators left!");
-                        return;
-                    }
-                    openLocators = closedLocators;
-                    closedLocators = new List<Locator>();
-                }
-
-                Locator locator = openLocators[UnityEngine.Random.Range(0, openLocators.Count)];
-
-                if (UnityEngine.Random.Range(0, 2) < 1)
-                {
-                    closedLocators.Add(locator);
-                    openLocators.Remove(locator);
-                    locator = openLocators[UnityEngine.Random.Range(0, openLocators.Count)];
-                }
+                y++;
+                int randomIndex = UnityEngine.Random.Range(0, openLocators.Count);
+                print(randomIndex);
+                Locator locator = openLocators[randomIndex];
 
                 GameObject[] possibleTiles = FindTile(currentTileSet, locator);
 
                 if (possibleTiles.Length > 0)
                 {
+                    print("found locator");
                     locatorFound = true;
                     openLocators.Remove(locator);
                     currentTile = possibleTiles[UnityEngine.Random.Range(0, possibleTiles.Length)];
                     prefabTilemap = currentTile.GetComponent<Tilemap>();
-                    Locator matchingLoc;
+                    List<Locator> newLocs;
                     print(prefabTilemap);
-                    CopyTiles(currentMap, prefabTilemap, locator, out matchingLoc);
+                    CopyTiles(currentMap, prefabTilemap, locator, out newLocs);
 
-                    foreach (Locator loc in prefabTilemap.GetComponent<TileStats>().locators)
-                    {
-                        openLocators.Add(loc);
-                    }
-                    openLocators.Remove(matchingLoc);
+                    openLocators.AddRange(newLocs);
+                    y = 0;
+                }
+                if (y == 1000)
+                {
+                    Debug.LogError("infinite loop????");
+                    locatorFound = true;
                 }
             }
+
+            List<Locator> noOverlapLocators = new List<Locator>();
+
+            foreach(Locator l in openLocators)
+            {
+                if (CheckLocatorOverlap((int)l.location.x, (int)l.location.y, l.dir))
+                {
+                    noOverlapLocators.Add(l);
+                }
+            }
+
+            openLocators = noOverlapLocators;
         }
+
+        List<Locator> previousRegionLocators = openLocators;
+        openLocators = new List<Locator>();
+
         /*
         GameObject[] possibleTiles = new GameObject[0];
 
@@ -309,12 +398,12 @@ public class MapGenerator : MonoBehaviour
         */
 
 
-        
+
 
         //CopyTiles(currentMap, prefabTilemap, 5, 0);
 
         //check if tile has resource
-        currentRegionSize++;
+        //currentRegionSize++;
 
         //grid, instead of simplifying 2,1, use actual tile numbers - 21, 67, then i have exact offset of each til
             //can calculate fitting
