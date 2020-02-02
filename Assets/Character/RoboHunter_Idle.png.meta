@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 1a2874a9be8664649b2fe59127818838
+guid: 5bb1532d0964de04797c6348e5656e11
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8757553282231554496
-    second: RoboNurse_Yellow_Walk_0
+      213: -7560534750557492608
+    second: RoboHunter_Idle_0
   - first:
-      213: 5397141326940318238
-    second: RoboNurse_Yellow_Walk_1
-  - first:
-      213: -8017858805600503162
-    second: RoboNurse_Yellow_Walk_2
-  - first:
-      213: 3763498480158681002
-    second: RoboNurse_Yellow_Walk_3
+      213: -8334535956570708106
+    second: RoboHunter_Idle_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -98,7 +92,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RoboNurse_Yellow_Walk_0
+      name: RoboHunter_Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +106,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 178d32c7a9f7059408caaeade42a6a9e
-      internalID: -8757553282231554496
+      spriteID: 3ad888ffebc8422449c434faba0baadd
+      internalID: -7560534750557492608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RoboNurse_Yellow_Walk_1
+      name: RoboHunter_Idle_1
       rect:
         serializedVersion: 2
         x: 122
@@ -133,50 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42fa7775c44481647b57fdba52e63af5
-      internalID: 5397141326940318238
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoboNurse_Yellow_Walk_2
-      rect:
-        serializedVersion: 2
-        x: 244
-        y: 0
-        width: 122
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee5084bc11eb25c47ad58a6ab1932440
-      internalID: -8017858805600503162
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoboNurse_Yellow_Walk_3
-      rect:
-        serializedVersion: 2
-        x: 366
-        y: 0
-        width: 122
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dbd53983d0bcd44489e4bc42d5334430
-      internalID: 3763498480158681002
+      spriteID: fe5b4011dcf1131459ec39bf2d991e0e
+      internalID: -8334535956570708106
       vertices: []
       indices: 
       edges: []

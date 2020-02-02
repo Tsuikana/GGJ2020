@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 1a2874a9be8664649b2fe59127818838
+guid: fafa0573f40c57d4da69331ab2ea9eeb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8757553282231554496
-    second: RoboNurse_Yellow_Walk_0
+      213: 1481089477433926383
+    second: RoboHunter_Walk_0
   - first:
-      213: 5397141326940318238
-    second: RoboNurse_Yellow_Walk_1
+      213: -2741263169094062897
+    second: RoboHunter_Walk_1
   - first:
-      213: -8017858805600503162
-    second: RoboNurse_Yellow_Walk_2
+      213: -6237811529366975271
+    second: RoboHunter_Walk_2
   - first:
-      213: 3763498480158681002
-    second: RoboNurse_Yellow_Walk_3
+      213: -3554160073943671144
+    second: RoboHunter_Walk_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -98,7 +98,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RoboNurse_Yellow_Walk_0
+      name: RoboHunter_Walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 178d32c7a9f7059408caaeade42a6a9e
-      internalID: -8757553282231554496
+      spriteID: 2c0fa73e091ec324bb65f4c1b7dfbe26
+      internalID: 1481089477433926383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RoboNurse_Yellow_Walk_1
+      name: RoboHunter_Walk_1
       rect:
         serializedVersion: 2
         x: 122
@@ -133,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42fa7775c44481647b57fdba52e63af5
-      internalID: 5397141326940318238
+      spriteID: 6c599de0fae417e47ad2a5d139a0e6eb
+      internalID: -2741263169094062897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RoboNurse_Yellow_Walk_2
+      name: RoboHunter_Walk_2
       rect:
         serializedVersion: 2
         x: 244
@@ -154,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee5084bc11eb25c47ad58a6ab1932440
-      internalID: -8017858805600503162
+      spriteID: e9c2b98a46dc4bf4bb80d8cc3ce1ef06
+      internalID: -6237811529366975271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RoboNurse_Yellow_Walk_3
+      name: RoboHunter_Walk_3
       rect:
         serializedVersion: 2
         x: 366
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbd53983d0bcd44489e4bc42d5334430
-      internalID: 3763498480158681002
+      spriteID: c273f1bdb28f95949919104cb55c0b77
+      internalID: -3554160073943671144
       vertices: []
       indices: 
       edges: []
