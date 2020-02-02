@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GirlsSpawner : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class GirlsSpawner : MonoBehaviour
 
     void SetDefault()
     {
+        Tilemap baseTilemap = GameObject.Find("Base Tilemap").GetComponent<Tilemap>();
+        print(baseTilemap);
     }
 
     public void SpawnGirls()
