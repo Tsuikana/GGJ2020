@@ -274,7 +274,7 @@ MonoBehaviour:
   newMoveTarget: {x: 0, y: 0}
   target: {fileID: 0}
   gameMan: {fileID: 0}
-  minInteractDistance: 0.2
+  minInteractDistance: 0.5
   prevPosDistThresh: 0.02
   maxPosListSize: 10
   prevPosList: []
@@ -307,6 +307,7 @@ MonoBehaviour:
   hungerDegenPerTick: 1
   thirstinessDegenPerTick: 1
   warmthDegenPerTick: 1
+  warmthRegenPerTick: 10
 --- !u!50 &1184656881
 Rigidbody2D:
   serializedVersion: 4

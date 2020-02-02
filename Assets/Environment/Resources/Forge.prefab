@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1558925999481840670}
   - component: {fileID: 2777923161918860800}
   - component: {fileID: 5328620434090004921}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Forge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

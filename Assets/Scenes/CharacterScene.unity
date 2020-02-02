@@ -772,17 +772,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8359856514408627325, guid: 9e434ed1e8da989428905cf14d74dc03,
-        type: 3}
-      propertyPath: girlPrefab
-      value: 
-      objectReference: {fileID: 6269505518312028497, guid: 4ea27154d4418794f92a73e328b3c561,
-        type: 3}
-    - target: {fileID: 8359856514408627325, guid: 9e434ed1e8da989428905cf14d74dc03,
-        type: 3}
-      propertyPath: numOfGirls
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e434ed1e8da989428905cf14d74dc03, type: 3}
 --- !u!1001 &1956170479

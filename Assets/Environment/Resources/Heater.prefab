@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 611813529216525763}
   - component: {fileID: 1284089012572404761}
   - component: {fileID: 3065913588490206213}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Heater
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,15 +21,19 @@ public class PartyManager : MonoBehaviour
     public bool isBusy;
     public bool isWarming; //Only sent to true when in collider of fire
     
-    public int hungerDegenPerTick;
-    public int thirstinessDegenPerTick;
-    public int warmthDegenPerTick;
+    public int hungerDegenPerTick = 1;
+    public int thirstinessDegenPerTick = 1;
+    public int warmthDegenPerTick = 1;
+    public int warmthRegenPerTick = 10;
 
     private float survivalDegenInterval;
     private float survivalDegenCurrentTime;
+    private float survivalRegenInterval;
+    private float survivalRegenCurrentTime;
     private float partyHungerMax;
     private float partyThirstinessMax;
     private int partyWarmthMax;
+    private int layerWarm;
 
     public float PartyHungerMax { get { return partyHungerMax; } }
     public float PartyThirstinessMax { get { return partyThirstinessMax; } }
@@ -49,9 +53,12 @@ public class PartyManager : MonoBehaviour
         girlList = new List<GameObject>();
         survivalDegenInterval = 5;
         survivalDegenCurrentTime = 0;
+        survivalRegenInterval = 1;
+        survivalRegenCurrentTime = 0;
         partyHungerMax = partyHunger;
         partyThirstinessMax = partyThirstiness;
         partyWarmthMax = partyWarmth;
+        layerWarm = LayerMask.NameToLayer("warm");
     }
 
     // Update is called once per frame
@@ -87,6 +94,24 @@ public class PartyManager : MonoBehaviour
         }
         else {
             survivalDegenCurrentTime += Time.deltaTime;
+        }
+
+        if (survivalRegenCurrentTime >= survivalRegenInterval)
+        {
+            if (isWarming)
+            {
+                partyWarmth += warmthRegenPerTick;
+                Debug.Log("Warming Up");
+                if (partyWarmth >= PartyWarmthMax)
+                {
+                    partyWarmth = PartyWarmthMax;
+                }
+            }
+            survivalRegenCurrentTime = 0;
+        }
+        else
+        {
+            survivalRegenCurrentTime += Time.deltaTime;
         }
     }
 
@@ -169,6 +194,22 @@ public class PartyManager : MonoBehaviour
             {
                 girl.GetComponent<GirlController>().UpdateHappiness(-1);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == layerWarm)
+        {
+            isWarming = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == layerWarm)
+        {
+            isWarming = false;
         }
     }
 }
