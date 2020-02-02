@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoutingMultiplier: 0.2
-  minCameraSize: 1
+  minCameraSize: 4
 --- !u!1 &1843780341
 GameObject:
   m_ObjectHideFlags: 0

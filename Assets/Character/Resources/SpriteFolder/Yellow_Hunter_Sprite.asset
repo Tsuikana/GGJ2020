@@ -6,7 +6,7 @@ Sprite:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RoboHunter_Yellow_Idle_0
+  m_Name: Yellow_Hunter_Sprite
   m_Rect:
     serializedVersion: 2
     x: 25
@@ -22,7 +22,7 @@ Sprite:
   m_AtlasName: 
   m_PackingTag: 
   m_RenderDataKey:
-    a4774cf0bf0496a42b7bf2af89f9c722: 6453967739094563335
+    64d0812517b02744db4f14ff0fd50f54: 21300000
   m_AtlasTags: []
   m_SpriteAtlas: {fileID: 0}
   m_RD:

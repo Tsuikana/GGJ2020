@@ -6,7 +6,7 @@ Sprite:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RoboScout_Green_Idle_0
+  m_Name: Green_Scout_Sprite
   m_Rect:
     serializedVersion: 2
     x: 21
@@ -22,7 +22,7 @@ Sprite:
   m_AtlasName: 
   m_PackingTag: 
   m_RenderDataKey:
-    c7275f5c0413f3b42aeec0bf2b0881e3: -2405265728889861766
+    035a5c1af9170824b8fe4b09ea59c990: 21300000
   m_AtlasTags: []
   m_SpriteAtlas: {fileID: 0}
   m_RD:

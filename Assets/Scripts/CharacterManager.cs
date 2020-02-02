@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    public float moveSpeed = 1f;
+    public float moveSpeed = 1.5f;
+    public float moveSpeedMultiplier = 0.1f;
     public float minMoveThresh = 0.01f;
+    private float defaultMoveSpeed = 2f;
+    private GameManager gameMan;
 
     public float TimeScaledMoveSpeed {
         get
@@ -30,11 +33,13 @@ public class CharacterManager : MonoBehaviour
 
     void SetDefaults()
     {
+        defaultMoveSpeed = moveSpeed;
+        gameMan = GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        moveSpeed = defaultMoveSpeed + gameMan.partyMan.partyMobility * moveSpeedMultiplier;
     }
 }

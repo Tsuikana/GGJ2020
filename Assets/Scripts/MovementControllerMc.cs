@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementControllerMc : MovementController
 {
-    public float minInteractDistance = 0.2f;
+    public float minInteractDistance = 0.5f;
     public float prevPosDistThresh = 0.02f;
     public int maxPosListSize = 10;
     public List<Vector2> prevPosList;

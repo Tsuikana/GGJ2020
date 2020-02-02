@@ -6,7 +6,7 @@ Sprite:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RoboRocket_Purple_Idle_0
+  m_Name: Purple_Witch_Sprite
   m_Rect:
     serializedVersion: 2
     x: 19
@@ -22,7 +22,7 @@ Sprite:
   m_AtlasName: 
   m_PackingTag: 
   m_RenderDataKey:
-    a51a0476dee7e7f438347056c379da18: 1282723925671055385
+    41bab3c0c246fbb429ea0c97d702555f: 21300000
   m_AtlasTags: []
   m_SpriteAtlas: {fileID: 0}
   m_RD:

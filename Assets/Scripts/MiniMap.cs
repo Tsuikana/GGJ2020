@@ -5,7 +5,7 @@ using UnityEngine;
 public class MiniMap : MonoBehaviour
 {
     public float scoutingMultiplier = 0.2f;
-    public float minCameraSize = 1f;
+    public float minCameraSize = 4f;
 
     private float refreshElapsedTime = 0f;
     private float refreshMaxTimeDelta = 1f;

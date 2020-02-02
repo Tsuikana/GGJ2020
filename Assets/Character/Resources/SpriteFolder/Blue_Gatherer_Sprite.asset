@@ -6,7 +6,7 @@ Sprite:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RoboGather_Blue_Idle
+  m_Name: Blue_Gatherer_Sprite
   m_Rect:
     serializedVersion: 2
     x: 0
@@ -22,7 +22,7 @@ Sprite:
   m_AtlasName: 
   m_PackingTag: 
   m_RenderDataKey:
-    ae62b734baa302d43a10717403d804ef: 21300000
+    35b3e0fd72d7cd743a4cb86ab8d7a78f: 21300000
   m_AtlasTags: []
   m_SpriteAtlas: {fileID: 0}
   m_RD:
