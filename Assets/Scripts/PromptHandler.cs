@@ -45,7 +45,14 @@ public class PromptHandler : MonoBehaviour
 
     void OnClickYes()
     {
-        gameMan.partyMan.AddGirlToParty();
+        if (gameMan.partyMan.partyParts >= 2)
+        {
+            gameMan.partyMan.AddGirlToParty();
+        }
+        else
+        {
+            Debug.Log("Not enough to repair");
+        }
         ClosePrompt();
     }
 

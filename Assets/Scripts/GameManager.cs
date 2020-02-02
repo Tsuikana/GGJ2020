@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         partyMan = FindObjectOfType<PartyManager>();
         uiMan = FindObjectOfType<UIManager>();
         this.gameObject.GetComponent<MapGenerator>().GenerateMap(out startPoint, out endPoint);
-        FindObjectOfType<MovementControllerMc>().gameObject.transform.position = startPoint;
+        FindObjectOfType<MovementControllerMc>().gameObject.transform.position = new Vector3(startPoint.x + 0.05f, startPoint.y + 0.35f, 0f);
         gSpawn = GetComponent<GirlsSpawner>();
         gSpawn.SpawnGirls();
     }

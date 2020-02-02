@@ -14,6 +14,7 @@ public class GirlStats : MonoBehaviour
     // Add to party manager
     public float hungerConsumed;
     public float thristinessConsumed;
+    public int costToRepair;
     public bool pickedUp;
 
     public enum Roles { Nurse, Gatherer, Hunter, Scout, Witch };
@@ -96,7 +97,7 @@ public class GirlStats : MonoBehaviour
             case "Hunter":
                 this.gameObject.AddComponent<HunterRole>();
                 break;
-            case "Scouter":
+            case "Scout":
                 this.gameObject.AddComponent<ScouterRole>();
                 break;
             case "Witch":

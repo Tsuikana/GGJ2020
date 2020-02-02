@@ -61,13 +61,14 @@ public class GirlsSpawner : MonoBehaviour
             newGirlStats.mobility = Random.Range(0, 3);
             newGirlStats.hungerConsumed = Random.Range(0, 1);
             newGirlStats.thristinessConsumed = Random.Range(0, 1);
+            newGirlStats.costToRepair = 2;
             
             var newRole = (GirlStats.Roles)roleList.GetValue(rnd.Next(roleList.Length));
             newGirlStats.role = newRole;
             var newFaction = (GirlStats.Factions)factionList.GetValue(rnd.Next(factionList.Length));
             newGirlStats.faction = newFaction;
             newGirlStats.SetDefaults();
-            var sprite = Resources.Load(string.Format("SpriteFolder/{0}_{1}_Sprite", newFaction.ToString(), newRole.ToString())) as Sprite;
+            /*var sprite = Resources.Load(string.Format("SpriteFolder/{0}_{1}_Sprite", newFaction.ToString(), newRole.ToString())) as Sprite;
             if (sprite)
             {
                 newGirl.GetComponent<SpriteRenderer>().sprite = sprite;
@@ -75,7 +76,7 @@ public class GirlsSpawner : MonoBehaviour
             else
             {
                 print(string.Format("{0}_{1}_Sprite not found.", newFaction.ToString(), newRole.ToString()));
-            }
+            }*/
            
             var newAnimController = Resources.Load(string.Format("Controllers/{0}_{1}", newFaction.ToString(), newRole.ToString())) as RuntimeAnimatorController;
             if (newAnimController)

@@ -147,6 +147,7 @@ public class PartyManager : MonoBehaviour
             partyMobility += newGirlStats.mobility;
             partyHungerConsumed += newGirlStats.hungerConsumed;
             partyThirstinessConsumed += newGirlStats.thristinessConsumed;
+            partyParts -= newGirlStats.costToRepair;
         }
     }
 

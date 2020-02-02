@@ -8,6 +8,7 @@ public class MovementController : MonoBehaviour
     public float extMoveDist = 0.2f;
     public bool hasMoveTarget;
     public Vector2 newMoveTarget;
+    public bool facingLeft;
 
     public GameObject target;
     public GameManager gameMan;
@@ -33,6 +34,14 @@ public class MovementController : MonoBehaviour
                 //Checks if object should move to the target
                 if (ShouldMoveToTarget(newMoveTarget))
                 {
+                    if ((newMoveTarget - (Vector2)transform.position).normalized.x < 0 && !facingLeft)
+                    {
+                        ReverseImage();
+                    }
+                    else if ((newMoveTarget - (Vector2)transform.position).normalized.x > 0 && facingLeft)
+                    {
+                        ReverseImage();
+                    }
                     //Calculate where to move
                     var movePosition = (Vector2)transform.position +
                         (newMoveTarget - (Vector2)transform.position).normalized *
@@ -61,12 +70,22 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    protected virtual void ReverseImage()
+    {
+        facingLeft = !facingLeft;
+        Rigidbody2D rb = this.gameObject.GetComponent<Rigidbody2D>();
+        Vector2 theScale = rb.transform.localScale;
+        theScale.x *= -1;
+        rb.transform.localScale = theScale;
+    }
+
     protected virtual void SetDefaults()
     {
         hasMoveTarget = false;
         newMoveTarget = Vector2.zero;
         bgLayerId = LayerMask.NameToLayer("background");
         gameMan = Camera.main.GetComponent<GameManager>();
+        facingLeft = true;
     }
 
     protected bool ShouldMoveToTarget(Vector2 moveTarget)
