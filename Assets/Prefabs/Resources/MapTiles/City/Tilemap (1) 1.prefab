@@ -1616,11 +1616,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   region: 2
-  hasHunt: 0
-  hasGather: 0
+  hasHunt: 1
+  hasGather: 1
   hasGirl: 0
   hasWarmth: 0
-  hasCollect: 0
+  hasCollect: 1
   locators:
   - location: {x: -5, y: 7}
     req: 0

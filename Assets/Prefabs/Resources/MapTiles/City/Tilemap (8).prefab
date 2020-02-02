@@ -1265,11 +1265,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   region: 2
-  hasHunt: 0
+  hasHunt: 1
   hasGather: 0
   hasGirl: 0
-  hasWarmth: 0
-  hasCollect: 0
+  hasWarmth: 1
+  hasCollect: 1
   locators:
   - location: {x: -9, y: 10}
     req: 0

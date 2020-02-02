@@ -2042,7 +2042,7 @@ MonoBehaviour:
   hasGather: 1
   hasGirl: 0
   hasWarmth: 0
-  hasCollect: 0
+  hasCollect: 1
   locators:
   - location: {x: 1, y: -2}
     req: 0
