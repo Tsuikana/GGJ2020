@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,17 +34,17 @@ public class HUD : MonoBehaviour
     void Update()
     {
         elapsedTime += Time.deltaTime;
-        var hunting = gameMan.partyMan.partyHunting;
-        var gathering = gameMan.partyMan.partyGathering;
-        var mobility = gameMan.partyMan.partyMobility;
-        var scouting = gameMan.partyMan.partyScouting;
+        var hunting = Math.Round(gameMan.partyMan.partyHunting);
+        var gathering = Math.Round(gameMan.partyMan.partyGathering);
+        var mobility = Math.Round(gameMan.partyMan.partyMobility);
+        var scouting = Math.Round(gameMan.partyMan.partyScouting);
         var hunger = gameMan.partyMan.partyHunger / gameMan.partyMan.PartyHungerMax;
         var thirst = gameMan.partyMan.partyThirstiness / gameMan.partyMan.PartyThirstinessMax;
         var warmth = (float)gameMan.partyMan.partyWarmth / (float)gameMan.partyMan.PartyWarmthMax;
         var parts = gameMan.partyMan.partyParts;
         
         //Display in seconds for now
-        valueTimer.text = elapsedTime.ToString() + "s";
+        valueTimer.text = ((int)elapsedTime).ToString() + "s";
         valueHunting.text = hunting.ToString();
         valueGathering.text = gathering.ToString();
         valueMobility.text = mobility.ToString();
