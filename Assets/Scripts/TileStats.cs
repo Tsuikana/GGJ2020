@@ -19,5 +19,6 @@ public struct Locator
     public Vector2 location;
     public MapHelper.ConnectionReqs req;
     public MapHelper.LocatorDirection dir;
+    public int difficulty;
 
 }

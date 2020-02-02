@@ -51,7 +51,7 @@ public class MapGenerator : MonoBehaviour
     public GameObject[] cityTiles;
     public GameObject[] neonTiles;
 
-    public int difficulty = 0;
+    //public int difficulty = 0;
     public int tileNum = 0;
 
     public Transform sprite;
@@ -244,10 +244,6 @@ public class MapGenerator : MonoBehaviour
         List<GameObject> resourceList = new List<GameObject>();
         List<GameObject> noResourceList = new List<GameObject>();
 
-        if(resource != MapHelper.ResourceType.None)
-        {
-            print(resource);
-        }
         foreach (GameObject obj in tiles)
         {
             switch (resource)
@@ -292,7 +288,6 @@ public class MapGenerator : MonoBehaviour
         {
             if (resourceList.Count > 0)
             {
-                print("return resource list with resources");
                 tileList = resourceList;
             }
         }
@@ -424,18 +419,20 @@ public class MapGenerator : MonoBehaviour
             return;
         }
 
-        GameObject[] currentTileSet = setRandomRegion();
-        int regionSize = UnityEngine.Random.Range(regionMinSize, regionMaxSize);
-        //int resourceNum = Mathf.CeilToInt((regionSize * 0.2f) * (difficulty * 0.3f) + (float)UnityEngine.Random.Range(0, 3));
-        
-        print("Region: " + currentRegion);
-        print("Region Size: " + regionSize);
-        //print("Resource: " + resourceNum);
-
         int randomIndex = UnityEngine.Random.Range(0, openLocators.Count);
         Locator locator = openLocators[randomIndex];
         openLocators = new List<Locator>();
         openLocators.Add(locator);
+
+        int difficulty = locator.difficulty + 1;
+        GameObject[] currentTileSet = setRandomRegion(difficulty);
+        int regionSize = UnityEngine.Random.Range(regionMinSize, regionMaxSize);
+        //int resourceNum = Mathf.CeilToInt((regionSize * 0.2f) * (difficulty * 0.3f) + (float)UnityEngine.Random.Range(0, 3));
+
+        print("Region: " + currentRegion);
+        print("Region Size: " + regionSize);
+
+        print("Region Difficulty: " + difficulty);
 
         //get random locator
         for (int x = 0; x < regionSize; x++)
@@ -447,10 +444,10 @@ public class MapGenerator : MonoBehaviour
             float rand = UnityEngine.Random.Range(0f, 1f);
             if (rand < currentResourceChance)
             {
-                print(rand);
-                print(currentResourceChance);
+                //print(rand);
+                //print(currentResourceChance);
                 currentResource = (MapHelper.ResourceType)UnityEngine.Random.Range(0, 3);
-                print(currentResource);
+                //print(currentResource);
             }
 
             while (!locatorFound)
@@ -506,34 +503,42 @@ public class MapGenerator : MonoBehaviour
             openLocators = noOverlapLocators;
         }
 
+        for (int i = 0; i < openLocators.Count; i++)
+        {
+            Locator temp = openLocators[i];
+            temp.difficulty = difficulty;
+            openLocators[i] = temp;
+        }
+
         previousRegionLocators.AddRange(openLocators);
     }
 
-    public GameObject[] setRandomRegion()
+    public GameObject[] setRandomRegion(int difficulty)
     {
         currentRegion = (MapHelper.Region)UnityEngine.Random.Range(0, 3);
+        float difficultyMultiplier = difficultyResourceModifier * difficulty;
 
         GameObject[] currentTileSet = null;
 
         if (currentRegion == MapHelper.Region.Forest)
         {
             currentTileSet = forestTiles;
-            currentResourceChance = forestResourceChance;
+            currentResourceChance = forestResourceChance - difficultyMultiplier;
         }
         else if (currentRegion == MapHelper.Region.Desert)
         {
             currentTileSet = desertTiles;
-            currentResourceChance = desertResourceChance;
+            currentResourceChance = desertResourceChance - difficultyMultiplier;
         }
         else if (currentRegion == MapHelper.Region.City)
         {
             currentTileSet = cityTiles;
-            currentResourceChance = cityResourceChance;
+            currentResourceChance = cityResourceChance - difficultyMultiplier;
         }
         else if (currentRegion == MapHelper.Region.Neon)
         {
             currentTileSet = desertTiles;// neonTiles;
-            currentResourceChance = neonResourceChance;
+            currentResourceChance = neonResourceChance - difficultyMultiplier;
         }
 
         return currentTileSet;
@@ -566,9 +571,8 @@ public class MapGenerator : MonoBehaviour
         //todo - always start with start spawn piece
 
         currentRegion = MapHelper.Region.Forest;//(MapHelper.Region)Random.Range(0, 3);
-        difficulty = difficulty++;
 
-        GameObject[] currentTileSet = setRandomRegion();
+        GameObject[] currentTileSet = setRandomRegion(0);
 
         GameObject currentTile = currentTileSet[UnityEngine.Random.Range(0, currentTileSet.Length)];
         Tilemap prefabTilemap = currentTile.GetComponent<Tilemap>();
@@ -578,6 +582,13 @@ public class MapGenerator : MonoBehaviour
         //print(prefabTilemap);
         CopyTiles(currentMap, prefabTilemap, startX, startY);
         previousRegionLocators.AddRange(prefabTilemap.GetComponent<TileStats>().locators);
+
+        for (int i = 0; i < previousRegionLocators.Count; i++)
+        {
+            Locator temp = previousRegionLocators[i];
+            temp.difficulty = 0;
+            previousRegionLocators[i] = temp;
+        }
 
         print("add first region");
         GenerateRegion(previousRegionLocators, out previousRegionLocators);
@@ -590,26 +601,7 @@ public class MapGenerator : MonoBehaviour
             GenerateRegion(previousRegionLocators, out previousRegionLocators);
         }
 
-        /*
-        GameObject[] possibleTiles = new GameObject[0];
-
-        while (possibleTiles.Length <= 0)
-        {
-            Locator[] prefabLocators = prefabTilemap.GetComponent<TileStats>().locators;
-
-            Locator nextLocator = prefabLocators[UnityEngine.Random.Range(0, prefabLocators.Length)];
-
-            print(nextLocator.dir);
-            print(nextLocator.location);
-            print(nextLocator.req);
-            possibleTiles = FindTile(forestTiles, nextLocator);
-
-            currentTile = possibleTiles[UnityEngine.Random.Range(0, possibleTiles.Length)];
-            prefabTilemap = currentTile.GetComponent<Tilemap>();
-            CopyTiles(currentMap, prefabTilemap, nextLocator);
-        }
-        */
-
+        
 
 
 
