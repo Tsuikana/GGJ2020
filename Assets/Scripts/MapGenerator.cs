@@ -508,7 +508,7 @@ public class MapGenerator : MonoBehaviour
         }
         else if (currentRegion == MapHelper.Region.Neon)
         {
-            currentTileSet = desertTiles;// neonTiles;
+            currentTileSet = neonTiles;
             currentResourceChance = neonResourceChance - difficultyMultiplier;
         }
 
