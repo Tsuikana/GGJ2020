@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -17,6 +18,34 @@ public class MapGenerator : MonoBehaviour
     public int totalTileMin = 100;
     public int totalTileMax = 150;
 
+    public float girlChance;
+    public float forestHuntChance = 0.1f;
+    public float forestGatherChance = 0.1f;
+    public float forestWarmthChance = 0.1f;
+    public float forestResourceChance = 0.2f;
+    public float forestResourceMin = 0.02f;
+
+    public float desertHuntChance = 0.05f;
+    public float desertGatherChance = 0.15f;
+    public float desertWarmthChance = 0f;
+    public float desertResourceChance = 0.1f;
+    public float desertResourceMin = 0.01f;
+
+    public float cityHuntChance = 0.08f;
+    public float cityGatherChance = 0.12f;
+    public float cityWarmthChance = 0.07f;
+    public float cityResourceChance = 0.15f;
+    public float cityResourceMin = 0.02f;
+
+    public float neonHuntChance = 0.07f;
+    public float neonGatherChance = 0.07f;
+    public float neonWarmthChance = 0.2f;
+    public float neonResourceChance = 0.1f;
+    public float neonResourceMin = 0.01f;
+
+    public float difficultyResourceModifier = 0.01f;
+
+
     public GameObject[] forestTiles;
     public GameObject[] desertTiles;
     public GameObject[] cityTiles;
@@ -32,6 +61,7 @@ public class MapGenerator : MonoBehaviour
     public Tilemap gatherTilemap;
     public Tilemap warmthTilemap;
     private MapHelper.Region currentRegion;
+    private float currentResourceChance;
     public TileBase testTile;
     MapHelper mapHelper;
 
@@ -121,7 +151,7 @@ public class MapGenerator : MonoBehaviour
             Tilemap propTilemap = child.GetComponent<Tilemap>();
 
             int type = child.gameObject.layer;
-            print("layer num type: " + type);
+            //print("layer num type: " + type);
 
             switch (type)
             {
@@ -139,7 +169,7 @@ public class MapGenerator : MonoBehaviour
                     return;
             }
 
-            print(to);
+            //print(to);
             foreach (var pos in propTilemap.cellBounds.allPositionsWithin)
             {
                 Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
@@ -154,7 +184,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    public GameObject[] FindTile(GameObject[] tileset, Locator nextLoc)
+    public GameObject[] FindTile(GameObject[] tileset, Locator nextLoc, MapHelper.ResourceType resourceType)
     {
         List<GameObject> availableTiles = new List<GameObject>();
 
@@ -204,8 +234,70 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
+        List<GameObject> filteredTiles = CheckTileResource(availableTiles, resourceType);
+        
+        return filteredTiles.ToArray();
+    }
 
-        return availableTiles.ToArray();
+    public List<GameObject> CheckTileResource(List<GameObject> tiles, MapHelper.ResourceType resource)
+    {
+        List<GameObject> resourceList = new List<GameObject>();
+        List<GameObject> noResourceList = new List<GameObject>();
+
+        if(resource != MapHelper.ResourceType.None)
+        {
+            print(resource);
+        }
+        foreach (GameObject obj in tiles)
+        {
+            switch (resource)
+            {
+                case MapHelper.ResourceType.Hunt:
+                    if (obj.GetComponent<TileStats>().hasHunt)
+                    {
+                        resourceList.Add(obj);
+                    }
+                    break;
+                case MapHelper.ResourceType.Gather:
+                    if (obj.GetComponent<TileStats>().hasGather)
+                    {
+                        resourceList.Add(obj);
+                    }
+                    break;
+                case MapHelper.ResourceType.Warmth:
+                    if (obj.GetComponent<TileStats>().hasWarmth)
+                    {
+                        resourceList.Add(obj);
+                    }
+                    break;
+                case MapHelper.ResourceType.Collect:
+                    if (obj.GetComponent<TileStats>().hasCollect)
+                    {
+                        resourceList.Add(obj);
+                    }
+                    break;
+                default:
+                    if(!obj.GetComponent<TileStats>().hasCollect && !obj.GetComponent<TileStats>().hasWarmth
+                        && !obj.GetComponent<TileStats>().hasGather && !obj.GetComponent<TileStats>().hasHunt)
+                    {
+                        noResourceList.Add(obj);
+                    }
+                    break;
+            }
+        }
+
+        List<GameObject> tileList = noResourceList;
+
+        if (resource != MapHelper.ResourceType.None)
+        {
+            if (resourceList.Count > 0)
+            {
+                print("return resource list with resources");
+                tileList = resourceList;
+            }
+        }
+
+        return tileList;
     }
 
     public Locator MatchingLoc(TileStats tilestat, MapHelper.LocatorDirection dir)
@@ -334,11 +426,11 @@ public class MapGenerator : MonoBehaviour
 
         GameObject[] currentTileSet = setRandomRegion();
         int regionSize = UnityEngine.Random.Range(regionMinSize, regionMaxSize);
-        int resourceNum = Mathf.CeilToInt((regionSize * 0.2f) * (difficulty * 0.3f) + (float)UnityEngine.Random.Range(0, 3));
-
+        //int resourceNum = Mathf.CeilToInt((regionSize * 0.2f) * (difficulty * 0.3f) + (float)UnityEngine.Random.Range(0, 3));
+        
         print("Region: " + currentRegion);
         print("Region Size: " + regionSize);
-        print("Resource Num: " + resourceNum);
+        //print("Resource: " + resourceNum);
 
         int randomIndex = UnityEngine.Random.Range(0, openLocators.Count);
         Locator locator = openLocators[randomIndex];
@@ -350,6 +442,16 @@ public class MapGenerator : MonoBehaviour
         {
             bool locatorFound = false;
             int y = 0;
+
+            MapHelper.ResourceType currentResource = MapHelper.ResourceType.None;
+            float rand = UnityEngine.Random.Range(0f, 1f);
+            if (rand < currentResourceChance)
+            {
+                print(rand);
+                print(currentResourceChance);
+                currentResource = (MapHelper.ResourceType)UnityEngine.Random.Range(0, 3);
+                print(currentResource);
+            }
 
             while (!locatorFound)
             {
@@ -364,7 +466,7 @@ public class MapGenerator : MonoBehaviour
                 //print(randomIndex);
                 locator = openLocators[randomIndex];
 
-                GameObject[] possibleTiles = FindTile(currentTileSet, locator);
+                GameObject[] possibleTiles = FindTile(currentTileSet, locator, currentResource);
 
                 if (possibleTiles.Length > 0)
                 {
@@ -382,7 +484,7 @@ public class MapGenerator : MonoBehaviour
                 else
                 {
                     Debug.LogWarning("possible tile not found");
-                    print(locator.dir);
+                    //print(locator.dir);
                 }
                 if (y == 1000)
                 {
@@ -416,18 +518,22 @@ public class MapGenerator : MonoBehaviour
         if (currentRegion == MapHelper.Region.Forest)
         {
             currentTileSet = forestTiles;
+            currentResourceChance = forestResourceChance;
         }
         else if (currentRegion == MapHelper.Region.Desert)
         {
             currentTileSet = desertTiles;
+            currentResourceChance = desertResourceChance;
         }
         else if (currentRegion == MapHelper.Region.City)
         {
             currentTileSet = cityTiles;
+            currentResourceChance = cityResourceChance;
         }
         else if (currentRegion == MapHelper.Region.Neon)
         {
             currentTileSet = desertTiles;// neonTiles;
+            currentResourceChance = neonResourceChance;
         }
 
         return currentTileSet;

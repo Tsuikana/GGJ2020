@@ -13,6 +13,15 @@ public class MapHelper: MonoBehaviour
         Neon,
     }
 
+    public enum ResourceType
+    {
+        Hunt,
+        Gather,
+        Warmth,
+        Collect,
+        None
+    }
+
     public int[,] grid;
 
     public enum ConnectionReqs

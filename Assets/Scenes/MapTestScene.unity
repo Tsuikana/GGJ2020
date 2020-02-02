@@ -230,6 +230,28 @@ MonoBehaviour:
   regionMaxSize: 20
   totalTileMin: 100
   totalTileMax: 150
+  girlChance: 0
+  forestHuntChance: 0.1
+  forestGatherChance: 0.1
+  forestWarmthChance: 0.1
+  forestResourceChance: 0
+  forestResourceMin: 0.02
+  desertHuntChance: 0.05
+  desertGatherChance: 0.15
+  desertWarmthChance: 0
+  desertResourceChance: 0.1
+  desertResourceMin: 0.01
+  cityHuntChance: 0.08
+  cityGatherChance: 0.12
+  cityWarmthChance: 0.07
+  cityResourceChance: 0.15
+  cityResourceMin: 0.02
+  neonHuntChance: 0.07
+  neonGatherChance: 0.07
+  neonWarmthChance: 0.2
+  neonResourceChance: 0.1
+  neonResourceMin: 0.01
+  difficultyResourceModifier: 0.01
   forestTiles: []
   desertTiles: []
   cityTiles: []
@@ -1355,7 +1377,7 @@ PrefabInstance:
     - target: {fileID: 625631997728075038, guid: 705bbfe7a36e84b2ea3acfb654790dce,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 625631997728075038, guid: 705bbfe7a36e84b2ea3acfb654790dce,
         type: 3}
@@ -1530,7 +1552,7 @@ PrefabInstance:
     - target: {fileID: 625631997728075038, guid: 705bbfe7a36e84b2ea3acfb654790dce,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 625631997728075038, guid: 705bbfe7a36e84b2ea3acfb654790dce,
         type: 3}
@@ -1680,7 +1702,7 @@ PrefabInstance:
     - target: {fileID: 7701381198701529076, guid: c12d2f487133a4e9c98381f1b5f35f70,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7701381198701529076, guid: c12d2f487133a4e9c98381f1b5f35f70,
         type: 3}
@@ -1759,7 +1781,7 @@ PrefabInstance:
     - target: {fileID: 5570798258903027640, guid: 293020e80559d4d89a53ecd220d814ba,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5570798258903027640, guid: 293020e80559d4d89a53ecd220d814ba,
         type: 3}
@@ -1920,6 +1942,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tilemap (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6125465319981345608, guid: 536c3a845802641b0b85f456cfaf54c5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6125465319981345609, guid: 536c3a845802641b0b85f456cfaf54c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1958,7 +1985,7 @@ PrefabInstance:
     - target: {fileID: 6125465319981345609, guid: 536c3a845802641b0b85f456cfaf54c5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6125465319981345609, guid: 536c3a845802641b0b85f456cfaf54c5,
         type: 3}

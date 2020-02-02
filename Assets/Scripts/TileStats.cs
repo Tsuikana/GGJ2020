@@ -5,7 +5,11 @@ using UnityEngine;
 public class TileStats : MonoBehaviour
 {
     public MapHelper.Region region;
-    public bool hasResource;
+    public bool hasHunt;
+    public bool hasGather;
+    public bool hasGirl;
+    public bool hasWarmth;
+    public bool hasCollect;
     public List<Locator> locators = new List<Locator>();
 }
 
