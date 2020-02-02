@@ -569,18 +569,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d96d39af87b0481eb0e7b7d8f17f636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  region: 0
-  hasResource: 0
+  region: 2
+  hasHunt: 0
+  hasGather: 0
+  hasGirl: 0
+  hasWarmth: 0
+  hasCollect: 0
   locators:
   - location: {x: 1, y: 0}
     req: 0
     dir: 0
+    difficulty: 0
   - location: {x: -4, y: 0}
     req: 0
     dir: 0
+    difficulty: 0
   - location: {x: -1, y: 2}
     req: 0
     dir: 3
+    difficulty: 0
   - location: {x: -1, y: -3}
     req: 0
     dir: 1
+    difficulty: 0

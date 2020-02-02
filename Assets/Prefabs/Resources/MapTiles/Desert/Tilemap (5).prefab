@@ -1057,11 +1057,11 @@ MonoBehaviour:
     req: 0
     dir: 3
     difficulty: 0
-  - location: {x: -7, y: 5}
+  - location: {x: -7, y: -5}
     req: 0
     dir: 1
     difficulty: 0
-  - location: {x: 5, y: 3}
+  - location: {x: -5, y: 3}
     req: 0
     dir: 0
     difficulty: 0

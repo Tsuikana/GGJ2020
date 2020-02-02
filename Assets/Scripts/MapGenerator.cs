@@ -9,7 +9,6 @@ public class MapGenerator : MonoBehaviour
 {
     public Tilemap[] tiles;
     public int mapIndex = 0;
-    public Vector2 startPoint;
 
     //make random number range
     public int mapWidth = 500;
@@ -557,8 +556,9 @@ public class MapGenerator : MonoBehaviour
         CopyTiles(currentMap, prefabTilemap, 0, 0);
         previousRegionLocators.AddRange(prefabTilemap.GetComponent<TileStats>().locators);
         Locator startLocator = previousRegionLocators[UnityEngine.Random.Range(0, previousRegionLocators.Count)];
-        startPoint = prefabTilemap.CellToWorld(new Vector3Int((int)startLocator.location.x, (int)startLocator.location.y, 0));
+        startPoint = currentMap.CellToWorld(new Vector3Int((int)startLocator.location.x, (int)startLocator.location.y, 0));
 
+        print(startPoint);
         for (int i = 0; i < previousRegionLocators.Count; i++)
         {
             Locator temp = previousRegionLocators[i];
