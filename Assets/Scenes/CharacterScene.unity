@@ -1011,6 +1011,30 @@ PrefabInstance:
       propertyPath: resourcesContainer
       value: 
       objectReference: {fileID: 374423856}
+    - target: {fileID: 1357036822, guid: 9e434ed1e8da989428905cf14d74dc03, type: 3}
+      propertyPath: mapWidth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357036822, guid: 9e434ed1e8da989428905cf14d74dc03, type: 3}
+      propertyPath: mapLength
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357036822, guid: 9e434ed1e8da989428905cf14d74dc03, type: 3}
+      propertyPath: regionMinSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357036822, guid: 9e434ed1e8da989428905cf14d74dc03, type: 3}
+      propertyPath: regionMaxSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357036822, guid: 9e434ed1e8da989428905cf14d74dc03, type: 3}
+      propertyPath: totalTileMax
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357036822, guid: 9e434ed1e8da989428905cf14d74dc03, type: 3}
+      propertyPath: totalTileMin
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3925027359165989205, guid: 9e434ed1e8da989428905cf14d74dc03,
         type: 3}
       propertyPath: m_Name
