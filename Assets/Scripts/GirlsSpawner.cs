@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class GirlsSpawner : MonoBehaviour
 {
-    public int numOfGirls;
     public GameObject girlPrefab;
     public Tilemap tileMapCollection;
     public List<Vector3> tileWorldLocations;
@@ -38,16 +37,16 @@ public class GirlsSpawner : MonoBehaviour
             Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
             if (tileMapCollection.HasTile(localPlace))
             {
-                tileWorldLocations.Add(localPlace);
+                var isometricLocation = tileMapCollection.CellToWorld(localPlace);
+                tileWorldLocations.Add(new Vector3(isometricLocation.x + 0.05f, isometricLocation.y + 0.35f, 0f));
             }
         }
         var rnd = new System.Random();
         System.Array roleList = System.Enum.GetValues(typeof(GirlStats.Roles));
         System.Array factionList = System.Enum.GetValues(typeof(GirlStats.Factions));
-        /*foreach (var loc in tileWorldLocations)
-        {
-            Instantiate(girlPrefab, loc, Quaternion.identity);
-        }*/
+
+        int numOfGirls = tileWorldLocations.Count / 50;
+        print(string.Format("Spawning {0} girls in this world of {1} tiles.", numOfGirls, tileWorldLocations.Count));
 
         for (int i = 0; i < numOfGirls; i++)
         {

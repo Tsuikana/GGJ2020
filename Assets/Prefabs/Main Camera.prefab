@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6554ef60c255c642a802e644e94ed7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfGirls: 10
+  numOfGirls: 100
   girlPrefab: {fileID: 6269505518312028497, guid: 4ea27154d4418794f92a73e328b3c561,
     type: 3}
   tileMapCollection: {fileID: 0}
