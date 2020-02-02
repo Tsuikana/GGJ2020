@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectSpawner : MonoBehaviour
+public class GirlsSpawner : MonoBehaviour
 {
-    public GameObject[] spawners;
+    public int numOfGirls;
     public GameObject girlPrefab;
+    public GameObject baseTilemap;
+    
     // Start is called before the first frame update
     void Start()
     {
         SetDefault();
-        SpawnGirls();
+        //SpawnGirls();
     }
 
     // Update is called once per frame
@@ -21,7 +23,6 @@ public class ObjectSpawner : MonoBehaviour
 
     void SetDefault()
     {
-        spawners = GameObject.FindGameObjectsWithTag("Spawners");
     }
 
     public void SpawnGirls()
@@ -30,9 +31,10 @@ public class ObjectSpawner : MonoBehaviour
         System.Array roleList = System.Enum.GetValues(typeof(GirlStats.Roles));
         System.Array factionList = System.Enum.GetValues(typeof(GirlStats.Factions));
 
-        foreach (var spawner in spawners)
+        for (int i = 0; i < numOfGirls; i++)
         {
-            var newGirl = Instantiate(girlPrefab, spawner.transform.position, Quaternion.identity);
+            Vector3 location = new Vector3(0, 0, 0);
+            var newGirl = Instantiate(girlPrefab, location, Quaternion.identity);
             var newGirlStats = newGirl.GetComponent<GirlStats>();
             newGirlStats.maxHappiness = 1;
             newGirlStats.hunting = Random.Range(0, 3);
