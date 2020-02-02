@@ -14,6 +14,14 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    public float FixedTimeScaledMoveSpeed
+    {
+        get
+        {
+            return moveSpeed * Time.fixedDeltaTime;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

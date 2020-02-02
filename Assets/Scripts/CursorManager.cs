@@ -44,7 +44,8 @@ public class CursorManager : MonoBehaviour
         // Stores RMB click point and target object
         if (Input.GetMouseButton(1) && !gameMan.partyMan.IsBusy)
         {
-            var hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var hits = Physics2D.RaycastAll(ray.origin, ray.direction);
             foreach (RaycastHit2D hit in hits)
             {
                 // Having a clickTarget means we've selected something, so we don't want to move on holding RMB
