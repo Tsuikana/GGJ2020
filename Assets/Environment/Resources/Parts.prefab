@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hungerUp: 0
   thirstUp: 0
-  partsUp: 0
+  partsUp: 1
   environmentType: 8
 --- !u!1 &8839495018673452517
 GameObject:

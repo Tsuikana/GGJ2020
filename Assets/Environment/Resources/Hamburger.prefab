@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe278dd02406fe41b01cb1071c0f2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerUp: 0
+  hungerUp: 3
   thirstUp: 0
   partsUp: 0
   environmentType: 4

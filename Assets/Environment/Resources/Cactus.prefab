@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerUp: 0
-  thirstUp: 0
+  thirstUp: 5
   partsUp: 0
   environmentType: 3
 --- !u!70 &7687920410816644876
