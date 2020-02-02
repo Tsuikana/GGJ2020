@@ -9,6 +9,7 @@ public class MapGenerator : MonoBehaviour
 {
     public Tilemap[] tiles;
     public int mapIndex = 0;
+    public Vector2 startPoint;
 
     //make random number range
     public int mapWidth = 100;
@@ -544,13 +545,14 @@ public class MapGenerator : MonoBehaviour
         return currentTileSet;
     }
 
-    public void GenerateMap()
+    public void GenerateMap(out Vector3 startPoint, out Vector3 endPoint)
     {
         //currentMap = GetComponent<Tilemap>();
         currentMap.ClearAllTiles();
 
         int totalTileNum = UnityEngine.Random.Range(totalTileMin, totalTileMax);
 
+        /*
         //create starting region
         int startX = mapWidth + (UnityEngine.Random.Range(0, 10) * UnityEngine.Random.Range(0, 2) * 2 - 1);
         if (startX > mapWidth)
@@ -567,6 +569,7 @@ public class MapGenerator : MonoBehaviour
         startX = 0;
         startY = 0;
         Vector2 startpos = new Vector2(startX, startY);
+        */
 
         //todo - always start with start spawn piece
 
@@ -580,8 +583,10 @@ public class MapGenerator : MonoBehaviour
 
         print("add first tile");
         //print(prefabTilemap);
-        CopyTiles(currentMap, prefabTilemap, startX, startY);
+        CopyTiles(currentMap, prefabTilemap, 0, 0);
         previousRegionLocators.AddRange(prefabTilemap.GetComponent<TileStats>().locators);
+        Locator startLocator = previousRegionLocators[UnityEngine.Random.Range(0, previousRegionLocators.Count)];
+        startPoint = prefabTilemap.CellToWorld(new Vector3Int((int)startLocator.location.x, (int)startLocator.location.y, 0));
 
         for (int i = 0; i < previousRegionLocators.Count; i++)
         {
@@ -601,9 +606,26 @@ public class MapGenerator : MonoBehaviour
             GenerateRegion(previousRegionLocators, out previousRegionLocators);
         }
 
-        
+        List<Locator> endPointLocators = new List<Locator>();
+        endPoint = new Vector3(0, 0, 0);
 
+        //mark end point location
+        foreach(Locator l in previousRegionLocators)
+        {
+            if (l.difficulty >= 4)
+            {
+                endPointLocators.Add(l);
+            }
+        }
 
+        if(endPointLocators.Count <= 0)
+        {
+            Debug.LogError("no endpoint found");
+            return;
+        }
+
+        Locator endPointLocator = endPointLocators[UnityEngine.Random.Range(0, endPointLocators.Count)];
+        endPoint = currentMap.CellToWorld(new Vector3Int((int)endPointLocator.location.x, (int)endPointLocator.location.y, 0));
 
         //CopyTiles(currentMap, prefabTilemap, 5, 0);
 
