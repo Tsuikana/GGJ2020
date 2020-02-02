@@ -281,11 +281,14 @@ MonoBehaviour:
   partyGathering: 1
   partyScouting: 1
   partyMobility: 1
-  partyHungerTotal: 100
+  partyHunger: 100
+  partyHungerMax: 0
   partyHungerConsumed: 1
-  partyThirstinessTotal: 100
+  partyThirstiness: 100
+  partyThirstinessMax: 0
   partyThirstinessConsumed: 1
   partyWarmth: 100
+  partyWarmthMax: 0
   partyParts: 10
   isBusy: 0
   isWarming: 0
