@@ -486,7 +486,7 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject[] setRandomRegion(int difficulty)
     {
-        currentRegion = (MapHelper.Region)UnityEngine.Random.Range(0, 3);
+        currentRegion = (MapHelper.Region)UnityEngine.Random.Range(0, 4);
         float difficultyMultiplier = difficultyResourceModifier * difficulty;
 
         GameObject[] currentTileSet = null;
