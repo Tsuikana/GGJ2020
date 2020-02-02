@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: -26312837214106131}
   - component: {fileID: 7811233940952117614}
   - component: {fileID: 2543354687359336921}
+  - component: {fileID: -1202863149802232834}
   m_Layer: 9
   m_Name: Girl
   m_TagString: Untagged
@@ -202,8 +203,8 @@ MonoBehaviour:
   gathering: 0
   scouting: 0
   mobility: 0
-  hunger: 0
-  thristiness: 0
+  hungerConsumed: 0
+  thristinessConsumed: 0
   pickedUp: 0
   role: 0
   faction: 0
@@ -256,3 +257,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede02a33e8b19fc4882706734aea36f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-1202863149802232834
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269505518312028497}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

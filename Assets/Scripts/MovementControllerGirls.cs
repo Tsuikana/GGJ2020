@@ -5,6 +5,7 @@ using UnityEngine;
 public class MovementControllerGirls : MovementController
 {
     public MovementControllerMc targetMoveCtrlMc;
+    private Animator anim;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -24,6 +25,8 @@ public class MovementControllerGirls : MovementController
                 newMoveTarget = targetMoveCtrlMc.prevPosList[0];
             }
 
+            anim.SetBool("hasMoveTarget", hasMoveTarget);
+
             //Move
             base.Update();
         }
@@ -34,6 +37,7 @@ public class MovementControllerGirls : MovementController
         base.SetDefaults();
         targetMoveCtrlMc = null;
         target = null;
+        anim = this.gameObject.GetComponent<Animator>();
     }
 
     public void FollowMc()

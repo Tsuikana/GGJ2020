@@ -8,6 +8,7 @@ public class GirlController : MonoBehaviour
     private PartyManager partyManager;
     private Faction ownFaction;
     private Role ownRole;
+    private Animator anim;
 
     void Start()
     {
@@ -21,6 +22,11 @@ public class GirlController : MonoBehaviour
         {
             partyManager.GirlLeaveParty(this.gameObject);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        //anim.SetFloat("Speed", Mathf.Abs(this.gameObject.GetComponent<Rigidbody2D>().velocity.x));
     }
 
     public void DestroyGirl()
@@ -69,5 +75,6 @@ public class GirlController : MonoBehaviour
         ownStats = this.gameObject.GetComponent<GirlStats>();
         ownFaction = this.gameObject.GetComponent<Faction>();
         ownRole = this.gameObject.GetComponent<Role>();
+        anim = this.gameObject.GetComponent<Animator>();
     }
 }

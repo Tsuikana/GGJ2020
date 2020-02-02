@@ -8,6 +8,7 @@ public class MovementControllerMc : MovementController
     public float prevPosDistThresh = 0.02f;
     public int maxPosListSize = 10;
     public List<Vector2> prevPosList;
+    private Animator anim;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -44,6 +45,8 @@ public class MovementControllerMc : MovementController
             }
         }
 
+        anim.SetBool("hasMoveTarget", hasMoveTarget);
+
         //Move
         base.Update();
 
@@ -67,6 +70,7 @@ public class MovementControllerMc : MovementController
         gameMan.partyMan.IsBusy = false;
         prevPosList = new List<Vector2>();
         target = gameMan.cursMan.gameObject;
+        anim = this.gameObject.GetComponent<Animator>();
     }
 
     private bool CanInteract(GameObject targetObject)
