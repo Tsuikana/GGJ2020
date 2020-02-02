@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public CursorManager cursMan;
     public UIManager uiMan;
     public Interaction interaction;
+    public GirlsSpawner gSpawn;
+    private Vector3 startPoint;
+    private Vector3 endPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,10 @@ public class GameManager : MonoBehaviour
         cursMan = FindObjectOfType<CursorManager>();
         partyMan = FindObjectOfType<PartyManager>();
         uiMan = FindObjectOfType<UIManager>();
+        this.gameObject.GetComponent<MapGenerator>().GenerateMap(out startPoint, out endPoint);
+        FindObjectOfType<MovementControllerMc>().gameObject.transform.position = startPoint;
+        gSpawn = GetComponent<GirlsSpawner>();
+        gSpawn.SpawnGirls();
     }
 
     // Update is called once per frame
