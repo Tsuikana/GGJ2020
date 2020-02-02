@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1849884838}
   - component: {fileID: 6888644668814116042}
   - component: {fileID: 8359856514408627325}
+  - component: {fileID: 1357036822}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -159,3 +160,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfGirls: 100
   girlPrefab: {fileID: 0}
+  baseTilemap: {fileID: 0}
+--- !u!114 &1357036822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925027359165989205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01302458977614ec68a815386d273c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiles: []
+  mapIndex: 0
+  startPoint: {x: 0, y: 0}
+  mapWidth: 100
+  mapLength: 100
+  regionMinSize: 5
+  regionMaxSize: 20
+  totalTileMin: 20
+  totalTileMax: 50
+  girlChance: 0
+  forestHuntChance: 0.1
+  forestGatherChance: 0.1
+  forestWarmthChance: 0.1
+  forestResourceChance: 0.2
+  forestResourceMin: 0.02
+  desertHuntChance: 0.05
+  desertGatherChance: 0.15
+  desertWarmthChance: 0
+  desertResourceChance: 0.1
+  desertResourceMin: 0.01
+  cityHuntChance: 0.08
+  cityGatherChance: 0.12
+  cityWarmthChance: 0.07
+  cityResourceChance: 0.15
+  cityResourceMin: 0.02
+  neonHuntChance: 0.07
+  neonGatherChance: 0.07
+  neonWarmthChance: 0.2
+  neonResourceChance: 0.1
+  neonResourceMin: 0.01
+  difficultyResourceModifier: 0.01
+  forestTiles: []
+  desertTiles: []
+  cityTiles: []
+  neonTiles: []
+  tileNum: 0
+  sprite: {fileID: 0}
+  currentMap: {fileID: 0}
+  resourcesContainer: {fileID: 0}
+  testTile: {fileID: 0}
