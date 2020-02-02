@@ -11,21 +11,29 @@ public class PartyManager : MonoBehaviour
     public float partyScouting;
     public float partyMobility;
 
-    public float partyHungerTotal;
+    public float partyHunger;
     public float partyHungerConsumed;
-    public float partyThirstinessTotal;
+    public float partyThirstiness;
     public float partyThirstinessConsumed;
 
     public int partyWarmth;
     public int partyParts;
     public bool isBusy;
     public bool isWarming; //Only sent to true when in collider of fire
-
-    private float survivalDegenInterval;
+    
     public int hungerDegenPerTick;
     public int thirstinessDegenPerTick;
     public int warmthDegenPerTick;
+
+    private float survivalDegenInterval;
     private float survivalDegenCurrentTime;
+    private float partyHungerMax;
+    private float partyThirstinessMax;
+    private int partyWarmthMax;
+
+    public float PartyHungerMax { get { return partyHungerMax; } }
+    public float PartyThirstinessMax { get { return partyThirstinessMax; } }
+    public int PartyWarmthMax { get { return partyWarmthMax; } }
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +49,9 @@ public class PartyManager : MonoBehaviour
         girlList = new List<GameObject>();
         survivalDegenInterval = 5;
         survivalDegenCurrentTime = 0;
+        partyHungerMax = partyHunger;
+        partyThirstinessMax = partyThirstiness;
+        partyWarmthMax = partyWarmth;
     }
 
     // Update is called once per frame
@@ -48,20 +59,20 @@ public class PartyManager : MonoBehaviour
     {
         if (survivalDegenCurrentTime >= survivalDegenInterval)
         {
-            partyHungerTotal -= hungerDegenPerTick + partyHungerConsumed;
-            if (partyHungerTotal <= 0) 
+            partyHunger -= hungerDegenPerTick + partyHungerConsumed;
+            if (partyHunger <= 0) 
             {
                 Death("Hunger");
                 Debug.Log("You ran out of food!"); 
             }
-            Debug.Log("Lose Hunger, current hunger: " + partyHungerTotal);
-            partyThirstinessTotal -= thirstinessDegenPerTick + partyThirstinessConsumed;
-            if (partyThirstinessTotal <= 0) 
+            Debug.Log("Lose Hunger, current hunger: " + partyHunger);
+            partyThirstiness -= thirstinessDegenPerTick + partyThirstinessConsumed;
+            if (partyThirstiness <= 0) 
             {
                 Death("Thirstiness");
                 Debug.Log("You ran out of food!"); 
             }
-            Debug.Log("Lose Thirstiness, current thirstiness: " + partyThirstinessTotal);
+            Debug.Log("Lose Thirstiness, current thirstiness: " + partyThirstiness);
             if (!isWarming)
             {
                 partyWarmth -= warmthDegenPerTick;
@@ -143,8 +154,8 @@ public class PartyManager : MonoBehaviour
 
         if (safeEnvironment)
         {
-            partyThirstinessTotal += thirstUp;
-            partyHungerTotal += hungerUp;
+            partyThirstiness += thirstUp;
+            partyHunger += hungerUp;
             partyParts += partsUp;
 
             foreach (var girl in girlList)

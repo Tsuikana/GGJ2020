@@ -16,7 +16,7 @@ public class GirlStats : MonoBehaviour
     public float thristinessConsumed;
     public bool pickedUp;
 
-    public enum Roles { Nurse, Gatherer, Hunter, Scouter, Witch };
+    public enum Roles { Nurse, Gatherer, Hunter, Scout, Witch };
     public Roles role;
 
     public enum Factions { Red, Blue, Green, Yellow, Purple };
