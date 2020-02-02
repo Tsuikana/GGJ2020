@@ -12,12 +12,12 @@ public class MapGenerator : MonoBehaviour
     public Vector2 startPoint;
 
     //make random number range
-    public int mapWidth = 100;
-    public int mapLength = 100;
-    public int regionMinSize = 5;
-    public int regionMaxSize = 20;
-    public int totalTileMin = 100;
-    public int totalTileMax = 150;
+    public int mapWidth = 500;
+    public int mapLength = 500;
+    public int regionMinSize = 20;
+    public int regionMaxSize = 40;
+    public int totalTileMin = 200;
+    public int totalTileMax = 300;
 
     public float girlChance;
     public float forestHuntChance = 0.1f;
@@ -63,7 +63,7 @@ public class MapGenerator : MonoBehaviour
     //public Tilemap warmthTilemap;
     private MapHelper.Region currentRegion;
     private float currentResourceChance;
-    public TileBase testTile;
+    public GameObject testTile;
     MapHelper mapHelper;
 
     //make regions based on tile palette? base on tag?
@@ -85,7 +85,7 @@ public class MapGenerator : MonoBehaviour
         cityTiles = Resources.LoadAll<GameObject>("MapTiles/City");
         neonTiles = Resources.LoadAll<GameObject>("MapTiles/Neon");
 
-        GenerateMap(out Vector3 startPoint, out Vector3 endPoint);
+        //GenerateMap(out Vector3 startPoint, out Vector3 endPoint);
     }
 
     public void CopyTiles(Tilemap to, Tilemap from, int startPosX, int startPosY)
