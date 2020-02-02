@@ -58,9 +58,9 @@ public class MapGenerator : MonoBehaviour
     public Transform sprite;
 
     public Tilemap currentMap;
-    public Tilemap huntTilemap;
-    public Tilemap gatherTilemap;
-    public Tilemap warmthTilemap;
+    public GameObject resourcesContainer;
+    //public Tilemap gatherTilemap;
+    //public Tilemap warmthTilemap;
     private MapHelper.Region currentRegion;
     private float currentResourceChance;
     public TileBase testTile;
@@ -146,42 +146,13 @@ public class MapGenerator : MonoBehaviour
 
     public void CopyProps(Tilemap from, Locator dest, Locator start)
     {
-        Tilemap to;
+        //Tilemap to;
         foreach (Transform child in from.transform)
         {
-            Tilemap propTilemap = child.GetComponent<Tilemap>();
-
-            int type = child.gameObject.layer;
-            //print("layer num type: " + type);
-
-            switch (type)
-            {
-                case 12:
-                    to = gatherTilemap;
-                    break;
-                case 13:
-                    to = huntTilemap;
-                    break;
-                case 14:
-                    to = warmthTilemap;
-                    break;
-                default:
-                    Debug.LogError("prop without a proper layer set!");
-                    return;
-            }
-
-            //print(to);
-            foreach (var pos in propTilemap.cellBounds.allPositionsWithin)
-            {
-                Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
-                if (propTilemap.HasTile(localPlace))
-                {
-                    //print("copy prop: " + localPlace);
-                    TileBase tile = propTilemap.GetTile(localPlace);
-                    to.SetTile(new Vector3Int(-7 + localPlace.x + ((int)dest.location.x - (int)start.location.x),
-                         localPlace.y + ((int)dest.location.y - (int)start.location.y), 0), tile);
-                }
-            }
+            Vector3 position = child.position + (currentMap.CellToWorld(new Vector3Int((int)dest.location.x, (int)dest.location.y, 0))
+                - currentMap.CellToWorld(new Vector3Int((int)start.location.x, (int)start.location.y, 0)));
+            var newResource = Instantiate(child.gameObject, position, Quaternion.identity);
+            newResource.transform.parent = resourcesContainer.transform;
         }
     }
 
@@ -416,7 +387,7 @@ public class MapGenerator : MonoBehaviour
         previousRegionLocators = openLocators;
         if (openLocators.Count <= 0)
         {
-            Debug.LogError("no locators left!");
+            Debug.LogWarning("no locators left!");
             return;
         }
 
@@ -456,7 +427,7 @@ public class MapGenerator : MonoBehaviour
                 y++;
                 if(openLocators.Count <= 0)
                 {
-                    Debug.LogError("no locators left!");
+                    Debug.LogWarning("no locators left!");
                     return;
                 }
 
@@ -486,7 +457,7 @@ public class MapGenerator : MonoBehaviour
                 }
                 if (y == 1000)
                 {
-                    Debug.LogError("infinite loop????");
+                    Debug.LogWarning("infinite loop????");
                     locatorFound = true;
                 }
             }
