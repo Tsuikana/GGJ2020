@@ -85,7 +85,7 @@ public class MapGenerator : MonoBehaviour
         cityTiles = Resources.LoadAll<GameObject>("MapTiles/City");
         neonTiles = Resources.LoadAll<GameObject>("MapTiles/Neon");
 
-        GenerateMap();
+        GenerateMap(out Vector3 startPoint, out Vector3 endPoint);
     }
 
     public void CopyTiles(Tilemap to, Tilemap from, int startPosX, int startPosY)
