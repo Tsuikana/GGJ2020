@@ -73,10 +73,8 @@ public class MovementController : MonoBehaviour
     protected virtual void ReverseImage()
     {
         facingLeft = !facingLeft;
-        Rigidbody2D rb = this.gameObject.GetComponent<Rigidbody2D>();
-        Vector2 theScale = rb.transform.localScale;
-        theScale.x *= -1;
-        rb.transform.localScale = theScale;
+        var currentFlip = this.gameObject.GetComponent<SpriteRenderer>().flipX;
+        this.gameObject.GetComponent<SpriteRenderer>().flipX = !currentFlip;
     }
 
     protected virtual void SetDefaults()
