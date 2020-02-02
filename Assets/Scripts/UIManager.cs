@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public GameManager gameMan;
     public GameObject promptHandler;
+    public GameObject inefficientHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +24,25 @@ public class UIManager : MonoBehaviour
     {
         gameMan = FindObjectOfType<GameManager>();
         promptHandler = FindObjectOfType<PromptHandler>().gameObject;
-        promptHandler.gameObject.SetActive(false);
+        promptHandler.SetActive(false);
+        inefficientHandler = FindObjectOfType<InefficientHandler>().gameObject;
+        inefficientHandler.SetActive(false);
     }
 
     public void PromptRecruit(GameObject girl)
     {
-        gameMan.partyMan.IsBusy = true;
-        gameMan.partyMan.AddPendingGirl(girl);
-        promptHandler.gameObject.SetActive(true);
-        promptHandler.GetComponent<PromptHandler>().ShowPrompt();
+        if (gameMan.partyMan.partyParts >= 2)
+        {
+            gameMan.partyMan.IsBusy = true;
+            gameMan.partyMan.AddPendingGirl(girl);
+            promptHandler.SetActive(true);
+            promptHandler.GetComponent<PromptHandler>().ShowPrompt();
+        }
+        else
+        {
+            gameMan.partyMan.isBusy = true;
+            inefficientHandler.SetActive(true);
+            promptHandler.GetComponent<InefficientHandler>().ShowPrompt();
+        }
     }
 }

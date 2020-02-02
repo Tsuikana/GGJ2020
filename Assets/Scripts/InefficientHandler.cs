@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PromptHandler : MonoBehaviour
+public class InefficientHandler : MonoBehaviour
 {
-    public Button yesButton;
-    public Button noButton;
+    public Button closeButton;
     public GameManager gameMan;
 
     // Start is called before the first frame update
@@ -24,12 +23,11 @@ public class PromptHandler : MonoBehaviour
     public void SetDefaults()
     {
         var rectXform = GetComponent<RectTransform>();
-        rectXform.localPosition = new Vector3(rectXform.localPosition.x, 0f, rectXform.localPosition.z);
+        rectXform.localPosition = new Vector3(0f, 0f, rectXform.localPosition.z);
 
-        transform.position.Set(transform.position.x, 0f, transform.position.z);
+        transform.position.Set(0f, 0f, transform.position.z);
         gameMan = FindObjectOfType<GameManager>();
-        yesButton.onClick.AddListener(OnClickYes);
-        noButton.onClick.AddListener(OnClickNo);
+        closeButton.onClick.AddListener(OnClickClose);
     }
 
     public void ShowPrompt()
@@ -43,15 +41,8 @@ public class PromptHandler : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void OnClickYes()
+    void OnClickClose()
     {
-        gameMan.partyMan.AddGirlToParty();
-        ClosePrompt();
-    }
-
-    void OnClickNo()
-    {
-        gameMan.partyMan.RemovePendingGirl();
         ClosePrompt();
     }
 }
