@@ -272,9 +272,10 @@ MonoBehaviour:
   extMoveDist: 0.2
   hasMoveTarget: 0
   newMoveTarget: {x: 0, y: 0}
+  facingLeft: 0
   target: {fileID: 0}
   gameMan: {fileID: 0}
-  minInteractDistance: 0.5
+  minInteractDistance: 1
   prevPosDistThresh: 0.02
   maxPosListSize: 10
   prevPosList: []

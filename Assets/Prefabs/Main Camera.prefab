@@ -122,6 +122,10 @@ MonoBehaviour:
   uiMan: {fileID: 0}
   interaction: {fileID: 0}
   gSpawn: {fileID: 0}
+  prefabWinTrigger: {fileID: 1643988768780499450, guid: 7470f9aaf46ab94449817c41ea76922a,
+    type: 3}
+  winImage: {fileID: 0}
+  loseImage: {fileID: 0}
 --- !u!114 &1849884838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,13 +182,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiles: []
   mapIndex: 0
-  startPoint: {x: 0, y: 0}
   mapWidth: 100
   mapLength: 100
   regionMinSize: 5
   regionMaxSize: 20
-  totalTileMin: 20
-  totalTileMax: 50
+  totalTileMin: 100
+  totalTileMax: 150
   girlChance: 0
   forestHuntChance: 0.1
   forestGatherChance: 0.1
