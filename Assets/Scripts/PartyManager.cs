@@ -117,7 +117,7 @@ public class PartyManager : MonoBehaviour
 
     void Death(string deathReason)
     {
-        //Go to endscreen
+        FindObjectOfType<GameManager>().LoseGame(deathReason);
     }
 
     public void AddPendingGirl(GameObject newGirl) { pendingPartyGirl = newGirl; }
