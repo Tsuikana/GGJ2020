@@ -35,8 +35,14 @@ public class GameManager : MonoBehaviour
         gSpawn = GetComponent<GirlsSpawner>();
         gSpawn.SpawnGirls();
 
-        sceneWinTrigger = Instantiate(prefabWinTrigger);
-        sceneWinTrigger.transform.position = endPoint;
+        Invoke("SetEndTile", 60);
+        
+    }
+
+    void SetEndTile()
+    {
+        print("We just made an end tile.");
+        sceneWinTrigger = Instantiate(prefabWinTrigger, endPoint, Quaternion.identity);
     }
 
     // Update is called once per frame
